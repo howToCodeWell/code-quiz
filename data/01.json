@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "How Many HTML Heading levels are there",
+      "answers": [
+        6,
+        4,
+        8
+      ],
+      "correct_answer": 0,
+      "category": "html"
+    },
+    {
+      "question": "What is a PHP session used for?",
+      "answers": [
+        "Storing data between pages",
+        "Memory protection between pages",
+        "Storing log messages between pages"
+      ],
+      "correct_answer": 0,
+      "category": "php"
+    },
+    {
+      "question": "What is the aside tag used for?",
+      "answers": [
+        "Primary Content",
+        "Empty Content",
+        "Indirectly related content"
+      ],
+      "correct_answer": 2,
+      "category": "html"
+    },
+    {
+      "question": "Which HTML attribute references submitted data?",
+      "answers": [
+        "id",
+        "class",
+        "name"
+      ],
+      "correct_answer": 2,
+      "category": "html"
+    }
+  ]
+}

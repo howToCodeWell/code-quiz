@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "What does ‘this’ refer to in a JavaScript object method?",
+      "answers": [
+        "The object",
+        "Private properties",
+        "Inherited properties"
+      ],
+      "correct_answer": 0,
+      "category": "js"
+    },
+    {
+      "question": "Is JavaScript case sensitive?",
+      "answers": [
+        "Yes",
+        "No"
+      ],
+      "correct_answer": 0,
+      "category": "js"
+    },
+    {
+      "question": "How many types of loops does JavaScript have?",
+      "answers": [
+        7,
+        5,
+        3,
+        2
+      ],
+      "correct_answer": 0,
+      "category": "js"
+    },
+    {
+      "question": "What is a callback in JavaScript?",
+      "answers": [
+        "Functions that are passed as arguments",
+        "Functions that return the current object",
+        "Functions that call themselves"
+      ],
+      "correct_answer": 0,
+      "category": "js"
+    },
+    {
+      "question": "How many types of pop up boxes does JavaScript have?",
+      "answers": [
+        1,
+        2,
+        3
+      ],
+      "correct_answer": 2,
+      "category": "js"
+    }
+  ]
+}
