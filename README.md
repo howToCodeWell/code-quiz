@@ -11,6 +11,11 @@ cd api
 docker-compose up -d 
 ```
 
+3. Run the database migrations
+```bash
+docker-compose exec api bin/console doctrine:migration:migrate 
+```
+
 ## Webserver
 To access the webserver go to [localhost](http://localhost)
 
