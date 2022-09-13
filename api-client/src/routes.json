@@ -1,0 +1,3 @@
+{
+  "/quiz/:slug": "/quiz?slug=:slug"
+}

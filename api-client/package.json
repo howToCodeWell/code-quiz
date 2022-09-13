@@ -6,6 +6,9 @@
   "author": "@howtocodewell",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "devDependencies": {
     "json-server": "^0.17.0"
   }
