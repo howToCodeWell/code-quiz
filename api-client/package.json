@@ -1,0 +1,9 @@
+{
+  "name": "code-quiz-client",
+  "version": "1.0.0",
+  "description": "This is the API client for the How To Code Well Code Quiz",
+  "main": "src/index.js",
+  "author": "@howtocodewell",
+  "license": "MIT",
+  "private": false
+}
