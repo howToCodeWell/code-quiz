@@ -44,3 +44,7 @@ cd api
 docker exec -it api-db-1  mysql -u root -p 
 ```
 The password is set in the DB service in docker-compose.yml
+
+# API Client
+
+See [API-Client readme](api-client/README.md)
