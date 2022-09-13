@@ -5,5 +5,8 @@
   "main": "src/index.js",
   "author": "@howtocodewell",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
 }
