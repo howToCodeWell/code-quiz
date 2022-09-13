@@ -1,7 +1,0 @@
-{
-  "quiz": [
-    { "id": 1, "title": "CSS Quiz", "slug": "css-quiz"},
-    { "id": 2, "title": "JavaScript Quiz", "slug": "javascript-quiz" },
-    { "id": 3, "title": "HTML Quiz", "slug": "html-quiz" }
-  ]
-}
