@@ -23,7 +23,7 @@ exit
 ```bash
 vagrant ssh
 cd api
-docker-compose exec api bin/console doctrine:migration:migrate 
+docker-compose exec api bin/console doctrine:migration:migrate
 ```
 4. Add the following entry to the `/etc/hosts`
 
@@ -41,10 +41,13 @@ To access the database run the following
 ```bash
 vagrant ssh
 cd api
-docker exec -it api-db-1  mysql -u root -p 
+docker exec -it api-db-1  mysql -u root -p
 ```
 The password is set in the DB service in docker-compose.yml
 
 # API Client
 
 See [API-Client readme](api-client/README.md)
+
+# Contributing to this project
+See our [CONTRIBUTING](CONTRIBUTING.md) page.
