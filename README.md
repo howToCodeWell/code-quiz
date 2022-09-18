@@ -1,14 +1,16 @@
 # Code Quiz
 Open source project will include an API and a App for the Code Quizzes
 
+## System Requirements
+- Vagrant
 
 ## Install API
 
-1. Install the `vagrant-docker-compose` plugin
-
+1. Install the vagrant box
 ```
-vagrant plugin install vagrant-docker-compose
+vagrant up
 ```
+If the `vagrant-docker-compose` gets installed, the command `vagrant up` will need to be ram again
 
 2. Install composer packages
 
