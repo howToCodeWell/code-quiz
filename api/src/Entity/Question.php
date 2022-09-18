@@ -22,6 +22,9 @@ class Question
     #[ORM\Column(length: 255)]
     private ?string $content = null;
 
+    /**
+     * @var Collection<int, Answer> $answers
+     */
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
     private Collection $answers;
 
