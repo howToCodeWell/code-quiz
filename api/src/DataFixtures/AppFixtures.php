@@ -107,5 +107,4 @@ class AppFixtures extends Fixture
 
         return $entity;
     }
-
 }

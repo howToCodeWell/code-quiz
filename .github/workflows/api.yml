@@ -29,7 +29,11 @@ jobs:
       - name: Install composer packages
         working-directory: ./api
         run: composer install
-      # 3. Run PHPStan
+      # 3. Run PHPCS
+      - name: PHP Code Sniffer
+        working-directory: ./api
+        run: ./vendor/bin/phpcs src
+      # 4. Run PHPStan
       - name: PHPStan
         working-directory: ./api
         run: ./vendor/phpstan/phpstan/phpstan analyse

@@ -38,6 +38,4 @@ class AnswerRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-
 }
