@@ -38,5 +38,4 @@ class QuestionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 }
