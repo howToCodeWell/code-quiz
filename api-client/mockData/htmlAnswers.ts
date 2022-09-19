@@ -24,7 +24,7 @@ export const HTMLAnswerOne: AnswerDTO[] = [
 export const HTMLAnswerTwo: AnswerDTO[] = [
     {
         id: "1",
-        content: "4t",
+        content: "4",
         is_correct: false,
         display_order: 1
     },
