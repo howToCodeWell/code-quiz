@@ -27,7 +27,13 @@ vagrant ssh
 cd api
 docker-compose exec api bin/console doctrine:migration:migrate
 ```
-4. Add the following entry to the `/etc/hosts`
+4. Load data fixtures
+```bash
+vagrant ssh
+cd api
+docker-compose exec api bin/console doctrine:fixtures:load
+```
+5. Add the following entry to the `/etc/hosts`
 
 ```bash
 192.168.1.200 codequiz.local
