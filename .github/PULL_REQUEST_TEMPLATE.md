@@ -10,10 +10,24 @@
 - [ ] The code is stable and I have tested it myself, to the best of my abilities.
 
 
-## Changes:
+## GitHub issues fixed:
+<!-- 
 
-- [...]
+Please list the GitHub issues that have been fixed by this pull request.
+The list must be formatted like so:
+
+- Fixes #ISSUE_ID
+- Fixes #ISSUE_ID
+
+For example 
+
+- Fixes #46
+- Fixes #45
+
+-->
+- Fixes 
 
 ## Other comments:
 
+<!-- Please add any supporting comments -->
 ...
