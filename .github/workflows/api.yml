@@ -1,15 +1,74 @@
-name: CI
+# A lot of this was inspired by https://brunoscheufler.com/blog/2022-04-24-required-github-actions-jobs-in-a-monorepo
+
+name: API
 
 on:
   pull_request:
-    paths:
-      - 'api/**'
+
 jobs:
-  phpstan:
+  change-detection:
+    runs-on: ubuntu-latest
+    outputs:
+      api: ${{ steps.changes.outputs.api }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          list-files: shell
+          filters: |
+            api:
+              - 'api/**'
+  tests:
+    needs: change-detection
+    if: needs.change-detection.outputs.api == 'true'
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout the code
       - uses: actions/checkout@v2
+      # 2. Install composer packages
       - uses: php-actions/composer@v5
-
+      # 3. Run PHPStan
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@master
+
+  after-tests:
+    needs: tests # run after tests
+    runs-on: ubuntu-latest
+    if: success() # only run when all test have passed
+    # store success output flag for ci job
+    outputs:
+      success: ${{ steps.setoutput.outputs.success }}
+    steps:
+      - id: setoutput
+        run: echo "::set-output name=success::true"
+
+  dummy-step:
+    runs-on: ubuntu-latest
+    needs: change-detection
+    # runs if API was not changed
+    if: needs.change-detection.outputs.api == 'false'
+    outputs:
+      success: ${{ steps.setoutput.outputs.success }}
+    steps:
+      - id: setoutput
+        run: echo "::set-output name=success::true"
+
+
+  # step that will be used for required status check
+  # make sure it has a unique name! this will always run, but
+  # after the tests & after-tests steps or the dummy step in case
+  # the API was not modified
+  ci_api:
+    runs-on: ubuntu-20.04
+    if: always()
+    needs: [tests, after-tests, dummy-step]
+    steps:
+      - run: |
+          passed="${{ needs.after-tests.outputs.success || needs.dummy-step.outputs.success }}"
+          if [[ $passed == "true" ]]; then
+            echo "Tests passed"
+            exit 0
+          else
+            echo "Tests failed"
+            exit 1
+          fi
