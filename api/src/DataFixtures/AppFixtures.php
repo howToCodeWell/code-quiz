@@ -46,9 +46,7 @@ class AppFixtures extends Fixture
         return $quizData;
     }
 
-    /**
-     * @return string[]
-     */
+
     protected function getFilePaths(): array
     {
         return [
