@@ -39,4 +39,8 @@ You should be familiar with the basics of
 
 ### Commit messages
 
-Commit messages must start with `[` issue_number `]`. For instance `[32] Fixes #32 Adding contribution guide`
+Commit messages must start with `#<ISSUE_NUMBER> Descriptive commit message`
+
+For example
+
+`#32 Adding contribution guide`
