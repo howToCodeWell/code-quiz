@@ -22,17 +22,17 @@ jobs:
     needs: change-detection
     if: needs.change-detection.outputs.api == 'true'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./api
     steps:
       # 1. Checkout the code
       - uses: actions/checkout@v2
       # 2. Install composer packages
-      - uses: php-actions/composer@v5
+      - name: Install composer packages
+        working-directory: ./api
+        run: composer install
       # 3. Run PHPStan
-      - name: PHPStan Static Analysis
-        uses: php-actions/phpstan@master
+      - name: PHPStan
+        working-directory: ./api
+        run: ./vendor/phpstan/phpstan/phpstan analyse
 
   after-tests:
     needs: tests # run after tests
