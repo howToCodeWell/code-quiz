@@ -1,42 +1,36 @@
 # A lot of this was inspired by https://brunoscheufler.com/blog/2022-04-24-required-github-actions-jobs-in-a-monorepo
 
-name: API
+name: API-Client
 
 on:
   pull_request:
-
+    paths:
+      - 'api-client/**'
+      - '.github/workflows/api-client.yaml'
 jobs:
   change-detection:
     runs-on: ubuntu-latest
     outputs:
-      api: ${{ steps.changes.outputs.api }}
+      api-client: ${{ steps.changes.outputs.api-client }}
     steps:
       - uses: dorny/paths-filter@v2
         id: changes
         with:
           list-files: shell
           filters: |
-            api:
-              - 'api/**'
+            api-client:
+              - 'api-client/**'
   tests:
     needs: change-detection
-    if: needs.change-detection.outputs.api == 'true'
+    if: needs.change-detection.outputs.api-client == 'true'
     runs-on: ubuntu-latest
     steps:
       # 1. Checkout the code
       - uses: actions/checkout@v2
-      # 2. Install composer packages
-      - name: Install composer packages
-        working-directory: ./api
-        run: composer install
-      # 3. Run PHPCS
-      - name: PHP Code Sniffer
-        working-directory: ./api
-        run: ./vendor/bin/phpcs src
-      # 4. Run PHPStan
-      - name: PHPStan
-        working-directory: ./api
-        run: ./vendor/phpstan/phpstan/phpstan analyse
+      # 2. Install NPM packages
+      - name: Install NPM packages
+        working-directory: ./api-client
+        run: yarn install
 
   after-tests:
     needs: tests # run after tests
@@ -52,8 +46,8 @@ jobs:
   dummy-step:
     runs-on: ubuntu-latest
     needs: change-detection
-    # runs if API was not changed
-    if: needs.change-detection.outputs.api == 'false'
+    # runs if API-Client was not changed
+    if: needs.change-detection.outputs.api-client == 'false'
     outputs:
       success: ${{ steps.setoutput.outputs.success }}
     steps:
@@ -65,7 +59,7 @@ jobs:
   # make sure it has a unique name! this will always run, but
   # after the tests & after-tests steps or the dummy step in case
   # the API was not modified
-  ci_api:
+  ci_api_client:
     runs-on: ubuntu-20.04
     if: always()
     needs: [tests, after-tests, dummy-step]
