@@ -4,7 +4,9 @@ name: API-Client
 
 on:
   pull_request:
-
+    paths:
+      - 'api-client/**'
+      - '.github/workflows/api-client.yaml'
 jobs:
   change-detection:
     runs-on: ubuntu-latest
