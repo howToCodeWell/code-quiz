@@ -2,11 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/question/{id}',
+            requirements: ['id' => '\d+']
+        )
+    ]
+)]
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
 {
