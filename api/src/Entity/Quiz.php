@@ -21,9 +21,6 @@ class Quiz
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    /**
-     * @var Collection<int, Question> $questions
-     */
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class)]
     private Collection $questions;
 
