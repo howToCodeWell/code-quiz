@@ -1,3 +1,5 @@
+// Quiz DTO's
+
 export interface QuizDTO {
     id: string
     title: string
