@@ -1,5 +1,4 @@
 <?php
-// Adding comment to test pipeline
 
 namespace App\Entity;
 
