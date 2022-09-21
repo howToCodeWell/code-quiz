@@ -1,61 +1,39 @@
 # Code Quiz
-Open source project will include an API and a App for the Code Quizzes
+Welcome to the Code Quiz Open Source project from [How To Code Well](https://howtocodewell.net). 
 
-## System Requirements
-- Vagrant
+This is an Open Source project that includes an API and an App for the daily code quizzes.
 
-## Install API
+The daily code quizzes are published to [Instagram](https://instagram.com/howtocodewell) and [Twitter](https://twitter.com/howtocodewell). This GitHub project is under development and will eventually allow access to the quizzes via a JSON API, Mobile app and website. 
 
-1. Install the vagrant box
-```
-vagrant up
-```
-If the `vagrant-docker-compose` gets installed, the command `vagrant up` will need to be ram again
+This Monorepo contains the following three projects.
 
-2. Install composer packages
+1. **API** - A Symfony 6, PHP 8  and Maria DB backend.
+2. **API-Client** - A NPM package for mock testing the API. 
+3. **App** - A Mobile application that displays code quizzes.
+4. **Website** - A Website that displays code quizzes.
 
-```
-vagrant ssh
-cd api
-docker-compose exec api composer install
-exit
-```
+## Project development
+This project is being developed live on [YouTube](https://youtube.com/howtocodewell) most Tuesdays at 6pm BST and most Sundays on [Twitch](https://twitch.tv/howtocodewell).
 
-3. Install database migrations
-```bash
-vagrant ssh
-cd api
-docker-compose exec api bin/console doctrine:migration:migrate
-```
-4. Load data fixtures
-```bash
-vagrant ssh
-cd api
-docker-compose exec api bin/console doctrine:fixtures:load
-```
-5. Add the following entry to the `/etc/hosts`
 
-```bash
-192.168.1.200 codequiz.local
-```
+## Help needed!
+If you would like to help build the project then please pick a ticket from the issues. If you are new to Open Source then pick an issue labeled `good first issue`. 
 
-Restart hosts.  On Mac this is done by `sudo killall -HUP mDNSResponder`
+Pull requests may be  reviewed live on Twitch/YouTube.
 
-## Webserver
-To access the webserver go to [codequiz.local](http://codequiz.local)
+# Contributing to this project
+
+See the [CONTRIBUTING](CONTRIBUTING.md) guide on how to contribute to the project.
+
+
+## API
+
+To install the API please read the [wiki page](https://github.com/howToCodeWell/code-quiz/wiki/API)
 
 ## Database
-To access the database run the following
-```bash
-vagrant ssh
-cd api
-docker exec -it api-db-1  mysql -u root -p
-```
-The password is set in the DB service in docker-compose.yml
+Please read the [wiki page](https://github.com/howToCodeWell/code-quiz/wiki/Database) on how to access and use the database.
 
 # API Client
 
-See [API-Client readme](api-client/README.md)
+To install the API client please read the  [API-Client wiki page](https://github.com/howToCodeWell/code-quiz/wiki/API-Client)
 
-# Contributing to this project
-See our [CONTRIBUTING](CONTRIBUTING.md) page.
