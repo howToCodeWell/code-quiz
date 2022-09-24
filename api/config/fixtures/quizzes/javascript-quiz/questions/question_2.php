@@ -5,7 +5,7 @@
  */
 $question = [
     [
-        'content' => 'What is a callback function  in JavaScript?',
+        'content' => 'What is a callback function in JavaScript?',
         'quiz'=> 'quiz-slug-javascript-quiz',
         'answers' => [
             [
