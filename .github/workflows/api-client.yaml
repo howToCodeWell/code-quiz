@@ -25,12 +25,15 @@ jobs:
     if: needs.change-detection.outputs.api-client == 'true'
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout the code
       - uses: actions/checkout@v2
-      # 2. Install NPM packages
+
       - name: Install NPM packages
         working-directory: ./api-client
         run: yarn install
+
+      - name: Unit tests
+        working-directory: ./api-client
+        run: yarn run test
 
   after-tests:
     needs: tests # run after tests
