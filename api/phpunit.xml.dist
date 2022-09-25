@@ -29,6 +29,7 @@
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
+            <directory suffix=".php">config/fixtures</directory>
         </include>
     </coverage>
 
