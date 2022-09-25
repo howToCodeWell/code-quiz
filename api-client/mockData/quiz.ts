@@ -1,5 +1,6 @@
 import {QuizDTO} from "../api-models"
 import HTMLQuestions from "./htmlQuestions"
+import JavaScriptQuestions from "./javaScriptQuestions"
 
 const quiz: QuizDTO[] = [
     {
@@ -12,7 +13,7 @@ const quiz: QuizDTO[] = [
         id: "2",
         title: "JavaScript Quiz",
         slug: 'javascript-quiz',
-        questions: []
+        questions: JavaScriptQuestions
     },
     {
         id: "3",
