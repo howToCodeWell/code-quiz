@@ -47,9 +47,9 @@ jobs:
         working-directory: ./api
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api ./vendor/phpstan/phpstan/phpstan analyse
 
-      - name: PHPUnit
+      - name: PHPUnit Unit tests
         working-directory: ./api
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api ./vendor/bin/phpunit --coverage-html tests/coverage
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api ./vendor/bin/phpunit --testsuite unit --coverage-html tests/coverage/unit
 
       - name: Test endpoint
         run: curl -X GET "http://localhost/api/v1"

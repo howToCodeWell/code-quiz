@@ -18,8 +18,11 @@
     </php>
 
     <testsuites>
-        <testsuite name="Code Quiz Test Suite">
-            <directory>tests</directory>
+        <testsuite name="unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+        <testsuite name="all">
+            <directory>tests/unit</directory>
         </testsuite>
     </testsuites>
 
