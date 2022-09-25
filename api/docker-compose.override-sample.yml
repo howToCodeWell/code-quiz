@@ -1,0 +1,7 @@
+services:
+  api:
+    environment:
+      # Defaults to off. See https://xdebug.org/docs/all_settings#mode for more settings
+      - XDEBUG_MODE=coverage
+
+

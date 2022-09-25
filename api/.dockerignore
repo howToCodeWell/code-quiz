@@ -8,3 +8,5 @@ ansible
 .env*
 .vagrant
 .phpcs-cache
+.phpunit.result.cache
+tests/coverage
