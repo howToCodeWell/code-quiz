@@ -57,7 +57,7 @@ jobs:
       - name: Stop containers
         working-directory: ./api
         if: always()
-        run: docker-compose -f docker-compose.test.yml down
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml down
 
   after-tests:
     needs: tests # run after tests
