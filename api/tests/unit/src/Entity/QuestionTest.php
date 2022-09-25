@@ -1,5 +1,5 @@
 <?php
-namespace App\Tests\unit\Entity;
+namespace App\Tests\unit\src\Entity;
 
 use App\Entity\Answer;
 use App\Entity\Question;
