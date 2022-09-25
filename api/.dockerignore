@@ -1,0 +1,12 @@
+vendor
+var
+ansible
+.dockerignore
+.gitignore
+.idea
+.DS_Store
+.env*
+.vagrant
+.phpcs-cache
+.phpunit.result.cache
+tests/coverage

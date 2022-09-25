@@ -33,6 +33,9 @@ RUN pecl install redis raphf \
 RUN pecl install pecl_http \
      && docker-php-ext-enable http
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 RUN apt-get clean autoclean \
     && apt-get autoremove --yes \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/

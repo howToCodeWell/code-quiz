@@ -17,10 +17,14 @@ services:
         BUILD_ENV: dev
     depends_on:
       - db
+    environment:
+      - XDEBUG_MODE=off
     networks:
        - code_quiz
     volumes:
       - .:/var/www/html
+      - ./infra/api/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./infra/api/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
 
   nginx:
     build:
