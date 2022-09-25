@@ -27,18 +27,39 @@ jobs:
     steps:
       # 1. Checkout the code
       - uses: actions/checkout@v2
+
+      - name: Start the containers
+        working-directory: ./api
+        run: docker-compose up -d --build
+
       # 2. Install composer packages
       - name: Install composer packages
         working-directory: ./api
-        run: composer install
+        run: docker-compose exec -T api composer install
+
+      # 2. Run database migrations
+      - name: Run Database migrations
+        working-directory: ./api
+        run: docker-compose exec -T api bin/console --no-interaction doctrine:migration:migrate
+
       # 3. Run PHPCS
       - name: PHP Code Sniffer
         working-directory: ./api
-        run: ./vendor/bin/phpcs src
+        run: docker-compose exec -T api ./vendor/bin/phpcs src
+
       # 4. Run PHPStan
       - name: PHPStan
         working-directory: ./api
-        run: ./vendor/phpstan/phpstan/phpstan analyse
+        run: docker-compose exec -T api ./vendor/phpstan/phpstan/phpstan analyse
+
+      # 5. Test curl request to localhost api docs
+      - name: Test endpoint
+        run: curl -X GET "http://localhost/api/v1"
+
+      - name: Stop containers
+        working-directory: ./api
+        if: always()
+        run: docker-compose down
 
   after-tests:
     needs: tests # run after tests
