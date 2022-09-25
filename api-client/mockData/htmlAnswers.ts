@@ -37,7 +37,7 @@ export const HTMLAnswerTwo: AnswerDTO[] = [
     {
         id: "3",
         content: "8",
-        is_correct: true,
+        is_correct: false,
         display_order: 3
     },
     {

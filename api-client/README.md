@@ -1,5 +1,8 @@
 # API Client
 
+# System requirements
+- Node 18.0.0
+
 # Install
 
 1. Install the packages
