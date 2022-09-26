@@ -5,12 +5,17 @@
 
 # Install
 
-1. Install the packages
+1. Copy .env.sample as .env
+```
+cp .env.sample .env
+```
+
+2. Install the packages
 ```
 yarn install
 ```
 
-2. Run the mock server
+3. Run the mock server
 ```
 yarn start
 ```
