@@ -1,6 +1,8 @@
+import * as dotenv from "dotenv"
 import jsonServer from "json-server"
 import data from "../mockData"
 
+dotenv.config()
 const server = jsonServer.create()
 
 server.use(jsonServer.rewriter({
@@ -12,6 +14,6 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 server.use(router)
-server.listen(3000, () => {
-    console.log('JSON Server is running')
+server.listen(process.env.API_PORT, () => {
+    console.log(`JSON Server is running\nAPI Version : ${process.env.API_VERSION}\n`)
 })
