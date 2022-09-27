@@ -31,6 +31,10 @@ jobs:
         working-directory: ./api-client
         run: yarn install
 
+      - name: Setting up .environment variables
+        working-directory: ./api-client
+        run: cp .env.sample .env
+
       - name: Unit tests
         working-directory: ./api-client
         run: yarn run test
