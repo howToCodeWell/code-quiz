@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv"
 import jsonServer from "json-server"
 import data from "../mockData"
+import routes from "./routes.json";
 
 dotenv.config()
 const server = jsonServer.create()
