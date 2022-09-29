@@ -4,10 +4,6 @@ import {mockApp} from "../../../../../src/api/mockClient";
 // Start the JSONServer
 const app = mockApp()
 
-beforeAll(() => {
-
-});
-
 afterAll(() => {
     // Stop the JSONServer
     app.close()
