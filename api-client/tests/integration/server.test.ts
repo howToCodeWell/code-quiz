@@ -1,9 +1,5 @@
 import {app} from "../../src/server";
 
-beforeAll(() => {
-
-});
-
 afterAll(() => {
     // Stop the JSONServer
     app.close()
