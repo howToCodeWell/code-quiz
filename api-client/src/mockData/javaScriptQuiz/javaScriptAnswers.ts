@@ -1,4 +1,4 @@
-import {AnswerDTO} from "../api-models"
+import {AnswerDTO} from "../../model/AnswerDTO"
 
 export const JavaScriptAnswerOne: AnswerDTO[] = [
     {

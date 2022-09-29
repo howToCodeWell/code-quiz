@@ -1,5 +1,5 @@
-import {getAll} from "../../../../../src/api/requestHandlers/quizRequest";
-import {mockApp} from "../../../../../src/api/mockClient";
+import {getAll} from "../../../../src/api/requestHandlers/quizRequest";
+import {mockApp} from "../../../../src/api/mockClient";
 
 // Start the JSONServer
 const app = mockApp()
@@ -15,8 +15,8 @@ describe('API Request /quiz', () => {
         expect(response.status).toEqual(200)
     })
 
-    it('Should have three quizzes', async () => {
+    it('Should have two quizzes', async () => {
         const response = await getAll()
-        expect(response.data.length).toEqual(3)
+        expect(response.data.length).toEqual(2)
     })
 })

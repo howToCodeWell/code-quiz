@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv"
-import jsonServer from "json-server"
-import data from "../../mockData"
+import * as jsonServer from "json-server"
+import data from "../mockData"
 
 export function mockApp() {
     dotenv.config()
