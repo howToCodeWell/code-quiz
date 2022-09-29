@@ -1,4 +1,5 @@
 import {mockApp} from "./api/mockClient";
+import data from "./mockData";
 
 // Start the JSONServer
-mockApp()
+export const app = mockApp()

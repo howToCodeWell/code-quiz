@@ -1,4 +1,4 @@
-import {QuestionDTO} from "../api-models"
+import {QuestionDTO} from "../../model/QuestionDTO"
 import {JavaScriptAnswerOne, JavaScriptAnswerTwo, JavaScriptAnswerThree, JavaScriptAnswerFour, JavaScriptAnswerFive, JavaScriptAnswerSix} from "./javaScriptAnswers";
 
 const JavaScriptQuestions: QuestionDTO[] = [
