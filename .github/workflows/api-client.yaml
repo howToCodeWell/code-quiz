@@ -35,6 +35,10 @@ jobs:
         working-directory: ./api-client
         run: cp .env.sample .env
 
+      - name: Lint
+        working-directory: ./api-client
+        run: yarn run lint
+
       - name: Unit tests
         working-directory: ./api-client
         run: yarn run test
