@@ -1,4 +1,4 @@
-import { HTMLAnswerOne, HTMLAnswerTwo } from '../../../mockData/htmlAnswers'
+import { HTMLAnswerOne, HTMLAnswerTwo } from '../../../src/mockData/htmlQuiz/htmlAnswers'
 
 const countCorrectAnswers = function(options)  {
     let correctAnswerCount = 0;
