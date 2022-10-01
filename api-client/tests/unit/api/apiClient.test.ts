@@ -13,8 +13,8 @@ describe('API Client headers', () => {
     })
 })
 describe('API Client options', () => {
-    it(`Should have the base url of ${process.env.API_BASE_PATH}:${process.env.API_PORT}/`, () => {
+    it(`Should have the base url of ${process.env.API_BASE_PATH}:${process.env.API_PORT}`, () => {
         const baseURL = apiClient.axiosClient.defaults.baseURL;
-        expect(baseURL).toEqual(`${process.env.API_BASE_PATH}:${process.env.API_PORT}/`)
+        expect(baseURL).toEqual(`${process.env.API_BASE_PATH}:${process.env.API_PORT}`)
     })
 })
