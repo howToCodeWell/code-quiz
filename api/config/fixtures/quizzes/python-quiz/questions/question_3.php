@@ -21,12 +21,12 @@ $question = [
             [
                 'content' => 'A function',
                 'is_correct' => false,
-                'display_order' => 2
+                'display_order' => 3
             ],
             [
                 'content' => 'Nothing',
                 'is_correct' => false,
-                'display_order' => 3
+                'display_order' => 4
             ],
         ]
     ]
