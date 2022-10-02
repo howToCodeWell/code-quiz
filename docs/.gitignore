@@ -1,2 +1,3 @@
 generated/openapi.yaml
-created
+created/openapi/*
+!created/openapi/.gitkeep
