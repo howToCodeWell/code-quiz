@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "@types/jest": "^29.0.3",
     "@types/json-server": "^0.14.4",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
