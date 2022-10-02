@@ -9,7 +9,8 @@
   "scripts": {
     "start": "npx ts-node src/server.ts",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "generate-api": "openapi-generator-cli generate -i ../docs/generated/openapi.yaml -g typescript -o ../docs/created/openapi --additional-properties=npmName=restClient,supportsES6=true,npmVersion=8.19.1,withInterfaces=true"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",
