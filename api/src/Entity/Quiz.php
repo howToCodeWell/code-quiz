@@ -9,14 +9,19 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(
+            paginationEnabled: false,
+            normalizationContext:  ['groups' => 'quiz:list'],
+        ),
         new Get(
             uriTemplate: '/quiz/{id}',
-            requirements: ['id' => '\d+']
+            requirements: ['id' => '\d+'],
+            normalizationContext:  ['groups' => 'quiz:item'],
         )
     ]
 )]
@@ -25,12 +30,15 @@ class Quiz
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['quiz:list', 'quiz:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['quiz:list', 'quiz:item'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['quiz:list', 'quiz:item'])]
     private ?string $slug = null;
 
     /**
