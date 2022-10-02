@@ -18,7 +18,7 @@ final class AppFixturesTest extends TestCase
         return $method->invokeArgs($object, $parameters);
     }
 
-    public function test_get_file_paths_method()
+    public function testGetFilePathsMethod()
     {
         $class = new AppFixtures;
         
