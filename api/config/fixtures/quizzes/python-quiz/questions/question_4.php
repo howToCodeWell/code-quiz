@@ -14,19 +14,19 @@ $question = [
                 'display_order' => 1
             ],
             [
-                'content' => 'emergency process',
+                'content' => 'Emergency process',
                 'is_correct' => true,
                 'display_order' => 2
             ],
             [
                 'content' => 'Enhancement process',
                 'is_correct' => false,
-                'display_order' => 2
+                'display_order' => 3
             ],
             [
                 'content' => 'Enhancement proposal',
                 'is_correct' => true,
-                'display_order' => 3
+                'display_order' => 4
             ],
         ]
     ]
