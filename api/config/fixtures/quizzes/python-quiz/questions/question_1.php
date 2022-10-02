@@ -9,12 +9,12 @@ $question = [
         'quiz'=> 'quiz-slug-python-quiz',
         'answers' => [
             [
-                'content' => 'yes',
+                'content' => 'Yes',
                 'is_correct' => false,
                 'display_order' => 1
             ],
             [
-                'content' => 'no',
+                'content' => 'No',
                 'is_correct' => true,
                 'display_order' => 2
             ],
