@@ -15,8 +15,8 @@ describe('API Request /quiz', () => {
         expect(response.status).toEqual(200)
     })
 
-    it('Should have two quizzes', async () => {
+    it('Should have more than 1 quiz', async () => {
         const response = await getAll()
-        expect(response.data.length).toEqual(2)
+        expect(response.data.length).toBeGreaterThan(1)
     })
 })
