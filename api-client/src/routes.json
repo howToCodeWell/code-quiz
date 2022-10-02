@@ -1,3 +1,4 @@
 {
+  "/": "/$1",
   "/quiz/:slug": "/quiz?slug=:slug"
 }

@@ -1,15 +1,16 @@
 import * as dotenv from "dotenv"
 import * as jsonServer from "json-server"
 import data from "../mockData"
+import routes from "../routes.json"
 
 export function mockApp() {
     dotenv.config()
     const server = jsonServer.create()
-
-    server.use(jsonServer.rewriter({
-        '/api/v1/': '/$1',
-        '/api/v1/quiz/:slug': '/quiz?slug=:slug'
-    }))
+    const rules = {}
+    for (const key in routes) {
+        rules[`/api/${process.env.API_VERSION}${key}`] = routes[key]
+    }
+    server.use(jsonServer.rewriter(rules))
     const router = jsonServer.router(data)
     const middlewares = jsonServer.defaults()
 
