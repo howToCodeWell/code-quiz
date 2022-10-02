@@ -18,6 +18,15 @@ final class AppFixturesTest extends TestCase
         return $method->invokeArgs($object, $parameters);
     }
 
+    public function testGetDataSets()
+    {
+        $class = new AppFixtures;
+        
+        $result = $this->invokeMethod($class, 'getDataSets');
+
+        $this->assertIsArray($result);
+    }
+
     public function testGetFilePathsMethod()
     {
         $class = new AppFixtures;
