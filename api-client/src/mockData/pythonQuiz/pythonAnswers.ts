@@ -9,7 +9,7 @@ export const PythonAnswerOne: AnswerDTO[] = [
     },
     {
         id: "2",
-        content: "no",
+        content: "No",
         is_correct: true,
         display_order: 2
     }
