@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\unit\config\fixtures\data_fixtures;
 
 use App\DataFixtures\AppFixtures;
+use App\Entity\Question;
 use App\Entity\Quiz;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -83,7 +84,7 @@ final class AppFixturesTest extends KernelTestCase
         $quiz = $this->invokeProperty($quiz, 'id', 10);
 
         $data = [
-            'content' => 'Test question content',
+            'content' => 'Test quiz content',
         ];
 
         $result = $this->invokeMethod($class, 'CreateQuestion', [$this->entityManager, $data, $quiz]);
@@ -91,6 +92,28 @@ final class AppFixturesTest extends KernelTestCase
         self::assertInstanceOf("App\Entity\Question", $result);
         self::assertInstanceOf("App\Entity\Quiz", $result->getQuiz());
         self::assertEquals(10, $result->getQuiz()->getId());
-        self::assertEquals("Test question content", $result->getContent());
+        self::assertEquals("Test quiz content", $result->getContent());
+    }
+
+    public function testCreateAnswer()
+    {
+        $class = new AppFixtures;
+        $question = new Question;
+        $question = $this->invokeProperty($question, 'id', 10);
+
+        $data = [
+            'content' => 'Test answer content',
+            'display_order' => 3,
+            'is_correct' => false
+        ];
+
+        /** @var \App\Entity\Answer $result */
+        $result = $this->invokeMethod($class, 'CreateAnswer', [$this->entityManager, $data, $question]);
+
+        self::assertInstanceOf("App\Entity\Answer", $result);
+        self::assertEquals(10, $result->getQuestion()->getId());
+        self::assertEquals("Test answer content", $result->getContent());
+        self::assertEquals(3, $result->getDisplayOrder());
+        self::assertEquals(false, $result->getIsCorrect());
     }
 }
