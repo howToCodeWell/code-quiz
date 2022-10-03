@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\unit\config\fixtures\data_fixtures;
 
 use App\DataFixtures\AppFixtures;
+use App\Entity\Quiz;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class AppFixturesTest extends KernelTestCase
@@ -32,10 +33,20 @@ final class AppFixturesTest extends KernelTestCase
         return $method->invokeArgs($object, $parameters);
     }
 
+    public function invokeProperty(&$object, $propertyName, $parameter)
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $property = $reflection->getProperty($propertyName);
+        $property->setAccessible(true);
+        $property->setValue($object, $parameter);
+
+        return $object;
+    }
+
     public function testGetDataSets()
     {
         $class = new AppFixtures;
-        
+
         $result = $this->invokeMethod($class, 'getDataSets');
 
         self::assertIsArray($result);
@@ -44,7 +55,7 @@ final class AppFixturesTest extends KernelTestCase
     public function testGetFilePathsMethod()
     {
         $class = new AppFixtures;
-        
+
         $result = $this->invokeMethod($class, 'getFilePaths');
 
         self::assertIsArray($result);
@@ -64,5 +75,23 @@ final class AppFixturesTest extends KernelTestCase
         self::assertInstanceOf("App\Entity\Quiz", $result);
         self::assertEquals("Test Quiz Title", $result->getTitle());
         self::assertEquals("test-quiz-title", $result->getSlug());
+    }
+
+    public function testCreateQuestion()
+    {
+        $class = new AppFixtures;
+        $quiz = new Quiz;
+        $quiz = $this->invokeProperty($quiz, 'id', 10);
+
+        $data = [
+            'content' => 'Test question content',
+        ];
+
+        $result = $this->invokeMethod($class, 'CreateQuestion', [$this->entityManager, $data, $quiz]);
+
+        self::assertInstanceOf("App\Entity\Question", $result);
+        self::assertInstanceOf("App\Entity\Quiz", $result->getQuiz());
+        self::assertEquals(10, $result->getQuiz()->getId());
+        self::assertEquals("Test question content", $result->getContent());
     }
 }
