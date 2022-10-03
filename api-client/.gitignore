@@ -1,5 +1,4 @@
 node_modules
 coverage
 .env
-src/generated/*
-!src/generated/.gitkeep
+src/generated
