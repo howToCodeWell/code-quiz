@@ -10,9 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class AppFixturesTest extends KernelTestCase
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
+
+    /** @var \Doctrine\ORM\EntityManager */
     private $entityManager;
 
     protected function setUp(): void
@@ -24,7 +23,7 @@ final class AppFixturesTest extends KernelTestCase
             ->getManager();
     }
 
-    public function invokeMethod(&$object, $methodName, array $parameters = array())
+    public function invokeMethod(object &$object, string $methodName, array $parameters = array())
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
@@ -33,7 +32,7 @@ final class AppFixturesTest extends KernelTestCase
         return $method->invokeArgs($object, $parameters);
     }
 
-    public function invokeProperty(&$object, $propertyName, $parameter)
+    public function invokeProperty(object &$object, string $propertyName, mixed $parameter)
     {
         $reflection = new \ReflectionClass(get_class($object));
         $property = $reflection->getProperty($propertyName);
