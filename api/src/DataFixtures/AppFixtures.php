@@ -10,22 +10,27 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    /** @var \Doctrine\Persistence\ObjectManager $objectManager */
+    private $objectManager;
+
     public function load(ObjectManager $manager): void
     {
+        $this->objectManager = $manager;
+
         $dataSets = $this->getDataSets();
         foreach ($dataSets as $quizData) {
-            $quiz = $this->createQuiz($manager, $quizData);
+            $quiz = $this->createQuiz($quizData);
             $questions = $quizData['questions'];
 
             foreach ($questions as $questionData) {
-                $question = $this->createQuestion($manager, $questionData, $quiz);
+                $question = $this->createQuestion($questionData, $quiz);
                 $answers = $questionData['answers'];
                 foreach ($answers as $answerData) {
-                    $this->createAnswer($manager, $answerData, $question);
+                    $this->createAnswer($answerData, $question);
                 }
             }
 
-            $manager->flush();
+            $this->objectManager->flush();
         }
     }
 
@@ -57,44 +62,41 @@ class AppFixtures extends Fixture
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{title: string, slug: string} $data
      * @return Quiz
      */
-    public function createQuiz(ObjectManager $manager, array $data): Quiz
+    public function createQuiz(array $data): Quiz
     {
         $entity = new Quiz();
         $entity->setTitle($data['title'])
             ->setSlug($data['slug']);
 
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{content: string} $data
      * @param Quiz $quiz
      * @return Question
      */
-    public function createQuestion(ObjectManager $manager, array $data, Quiz $quiz): Question
+    public function createQuestion(array $data, Quiz $quiz): Question
     {
         $entity = new Question();
         $entity->setContent($data['content'])
             ->setQuiz($quiz);
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{content: string, display_order: integer, is_correct: boolean} $data
      * @param Question $question
      * @return Answer
      */
-    public function createAnswer(ObjectManager $manager, array $data, Question $question): Answer
+    public function createAnswer(array $data, Question $question): Answer
     {
         $entity = new Answer();
         $entity
@@ -103,7 +105,7 @@ class AppFixtures extends Fixture
             ->setIsCorrect($data['is_correct'])
             ->setQuestion($question);
 
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }
