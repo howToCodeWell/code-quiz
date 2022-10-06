@@ -43,21 +43,6 @@ final class AppFixturesTest extends KernelTestCase
         return $object;
     }
 
-    // TODO : ask Peter : docker-compose exec api bin/console --env=test doctrine:database:create
-    public function testLoad() {
-        $class = new AppFixtures;
-        
-        $this->invokeMethod($class, 'load', [$this->entityManager]);
-
-        $question1 = $this->entityManager
-        ->getRepository(Question::class)
-        ->findOneBy(['content' => 'What is the <aside> tag for?']);
-        
-        self::assertEquals("What is the <aside> tag for?", $question1->getContent());
-        self::assertEquals("html-quiz", $question1->getQuiz()->getSlug());
-        //self::assertEquals("quiz-slug-html-quiz", $question1->getQuiz()->getSlug()); should return error ?
-    }
-
     public function testGetDataSets()
     {
         $class = new AppFixtures;
