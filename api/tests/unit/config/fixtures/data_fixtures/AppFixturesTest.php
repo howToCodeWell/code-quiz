@@ -7,21 +7,23 @@ namespace App\Tests\unit\config\fixtures\data_fixtures;
 use App\DataFixtures\AppFixtures;
 use App\Entity\Question;
 use App\Entity\Quiz;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use PHPUnit\Framework\TestCase;
 
-final class AppFixturesTest extends KernelTestCase
+final class AppFixturesTest extends TestCase
 {
 
-    /** @var \Doctrine\ORM\EntityManager */
-    private $entityManager;
+    private $appFixtures;
 
     protected function setUp(): void
     {
-        $kernel = self::bootKernel();
+        $objectManager = $this->getMockBuilder('Doctrine\Persistence\ObjectManager')
+            ->disableOriginalConstructor()
+            ->onlyMethods(['flush', 'persist'])
+            ->getMockForAbstractClass();
 
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        $appFixtures = new AppFixtures;
+        $appFixtures = $this->invokeProperty($appFixtures, 'objectManager', $objectManager);
+        $this->appFixtures = $appFixtures;
     }
 
     public function invokeProperty(object &$object, string $propertyName, mixed $parameter)
@@ -36,32 +38,26 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testGetDataSets()
     {
-        $appFixtures = new AppFixtures;
-
-        $result = $appFixtures->getDataSets();
+        $result = $this->appFixtures->getDataSets();
 
         self::assertIsArray($result);
     }
 
     public function testGetFilePathsMethod()
     {
-        $appFixtures = new AppFixtures;
-
-        $result = $appFixtures->getFilePaths();
+        $result = $this->appFixtures->getFilePaths();
 
         self::assertIsArray($result);
     }
 
     public function testCreateQuiz()
     {
-        $appFixtures = new AppFixtures;
-
         $data = [
             'title' => 'Test Quiz Title',
             'slug' => 'test-quiz-title'
         ];
 
-        $result = $appFixtures->createQuiz($this->entityManager, $data);
+        $result = $this->appFixtures->createQuiz($data);
 
         self::assertInstanceOf("App\Entity\Quiz", $result);
         self::assertEquals("Test Quiz Title", $result->getTitle());
@@ -70,7 +66,6 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testCreateQuestion()
     {
-        $appFixtures = new AppFixtures;
         $quiz = new Quiz;
         $quiz = $this->invokeProperty($quiz, 'id', 10);
 
@@ -78,7 +73,7 @@ final class AppFixturesTest extends KernelTestCase
             'content' => 'Test quiz content',
         ];
 
-        $result = $appFixtures->createQuestion($this->entityManager, $data, $quiz);
+        $result = $this->appFixtures->createQuestion($data, $quiz);
 
         self::assertInstanceOf("App\Entity\Question", $result);
         self::assertInstanceOf("App\Entity\Quiz", $result->getQuiz());
@@ -88,7 +83,6 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testCreateAnswer()
     {
-        $appFixtures = new AppFixtures;
         $question = new Question;
         $question = $this->invokeProperty($question, 'id', 10);
 
@@ -98,7 +92,7 @@ final class AppFixturesTest extends KernelTestCase
             'is_correct' => false
         ];
 
-        $result = $appFixtures->CreateAnswer($this->entityManager, $data, $question);
+        $result = $this->appFixtures->CreateAnswer($data, $question);
 
         self::assertInstanceOf("App\Entity\Answer", $result);
         self::assertEquals(10, $result->getQuestion()->getId());
