@@ -24,15 +24,6 @@ final class AppFixturesTest extends KernelTestCase
             ->getManager();
     }
 
-    public function invokeMethod(object &$object, string $methodName, array $parameters = array())
-    {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
-    }
-
     public function invokeProperty(object &$object, string $propertyName, mixed $parameter)
     {
         $reflection = new \ReflectionClass(get_class($object));
@@ -45,32 +36,32 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testGetDataSets()
     {
-        $class = new AppFixtures;
+        $AppFixtures = new AppFixtures;
 
-        $result = $this->invokeMethod($class, 'getDataSets');
+        $result = $AppFixtures->getDataSets();
 
         self::assertIsArray($result);
     }
 
     public function testGetFilePathsMethod()
     {
-        $class = new AppFixtures;
+        $AppFixtures = new AppFixtures;
 
-        $result = $this->invokeMethod($class, 'getFilePaths');
+        $result = $AppFixtures->getFilePaths();
 
         self::assertIsArray($result);
     }
 
     public function testCreateQuiz()
     {
-        $class = new AppFixtures;
+        $AppFixtures = new AppFixtures;
 
         $data = [
             'title' => 'Test Quiz Title',
             'slug' => 'test-quiz-title'
         ];
 
-        $result = $this->invokeMethod($class, 'CreateQuiz', [$this->entityManager, $data]);
+        $result = $AppFixtures->createQuiz($this->entityManager, $data);
 
         self::assertInstanceOf("App\Entity\Quiz", $result);
         self::assertEquals("Test Quiz Title", $result->getTitle());
@@ -79,7 +70,7 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testCreateQuestion()
     {
-        $class = new AppFixtures;
+        $AppFixtures = new AppFixtures;
         $quiz = new Quiz;
         $quiz = $this->invokeProperty($quiz, 'id', 10);
 
@@ -87,7 +78,7 @@ final class AppFixturesTest extends KernelTestCase
             'content' => 'Test quiz content',
         ];
 
-        $result = $this->invokeMethod($class, 'CreateQuestion', [$this->entityManager, $data, $quiz]);
+        $result = $AppFixtures->createQuestion($this->entityManager, $data, $quiz);
 
         self::assertInstanceOf("App\Entity\Question", $result);
         self::assertInstanceOf("App\Entity\Quiz", $result->getQuiz());
@@ -97,7 +88,7 @@ final class AppFixturesTest extends KernelTestCase
 
     public function testCreateAnswer()
     {
-        $class = new AppFixtures;
+        $AppFixtures = new AppFixtures;
         $question = new Question;
         $question = $this->invokeProperty($question, 'id', 10);
 
@@ -107,7 +98,7 @@ final class AppFixturesTest extends KernelTestCase
             'is_correct' => false
         ];
 
-        $result = $this->invokeMethod($class, 'CreateAnswer', [$this->entityManager, $data, $question]);
+        $result = $AppFixtures->CreateAnswer($this->entityManager, $data, $question);
 
         self::assertInstanceOf("App\Entity\Answer", $result);
         self::assertEquals(10, $result->getQuestion()->getId());
