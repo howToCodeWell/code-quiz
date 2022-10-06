@@ -32,8 +32,6 @@ services:
       context: .
       args:
         BUILD_ENV: dev
-        HOST_UID: ${HOST_UID}
-        HOST_GUID: ${HOST_GUID}
     ports:
       - "80:80"
     depends_on:
