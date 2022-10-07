@@ -83,6 +83,7 @@ class AppFixtures extends Fixture
     {
         return [
             'config/fixtures/quizzes/html-quiz/quiz.php',
+            'config/fixtures/quizzes/javascript-quiz/quiz.php',
             'config/fixtures/quizzes/python-quiz/quiz.php'
         ];
     }
