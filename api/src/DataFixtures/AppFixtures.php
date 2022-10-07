@@ -17,10 +17,10 @@ class AppFixtures extends Fixture
     {
         $this->objectManager = $manager;
 
-        $this->createQuizes();
+        $this->createQuizzes();
     }
 
-    public function createQuizes(): void
+    public function createQuizzes(): void
     {
         $dataSets = $this->getDataSets();
 
