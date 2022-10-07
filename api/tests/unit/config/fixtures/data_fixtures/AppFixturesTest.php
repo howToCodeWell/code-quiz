@@ -17,7 +17,6 @@ final class AppFixturesTest extends TestCase
     protected function setUp(): void
     {
         $objectManager = $this->getMockBuilder('Doctrine\Persistence\ObjectManager')
-            ->disableOriginalConstructor()
             ->onlyMethods(['flush', 'persist'])
             ->getMockForAbstractClass();
 
@@ -26,7 +25,7 @@ final class AppFixturesTest extends TestCase
         $this->appFixtures = $appFixtures;
     }
 
-    public function invokeProperty(object &$object, string $propertyName, mixed $parameter)
+    public function invokeProperty(object &$object, string $propertyName, mixed $parameter): object
     {
         $reflection = new \ReflectionClass(get_class($object));
         $property = $reflection->getProperty($propertyName);
