@@ -17,20 +17,37 @@ class AppFixtures extends Fixture
     {
         $this->objectManager = $manager;
 
+        $this->createQuizes();
+    }
+
+    public function createQuizes()
+    {
         $dataSets = $this->getDataSets();
+
         foreach ($dataSets as $quizData) {
             $quiz = $this->createQuiz($quizData);
             $questions = $quizData['questions'];
 
-            foreach ($questions as $questionData) {
-                $question = $this->createQuestion($questionData, $quiz);
-                $answers = $questionData['answers'];
-                foreach ($answers as $answerData) {
-                    $this->createAnswer($answerData, $question);
-                }
-            }
+            $this->createQuestions($questions, $quiz);
 
             $this->objectManager->flush();
+        }
+    }
+
+    public function createQuestions($questions, $quiz)
+    {
+        foreach ($questions as $questionData) {
+            $question = $this->createQuestion($questionData, $quiz);
+            $answers = $questionData['answers'];
+
+            $this->createAnswers($answers, $question);
+        }
+    }
+
+    public function createAnswers($answers, $question)
+    {
+        foreach ($answers as $answerData) {
+            $this->createAnswer($answerData, $question);
         }
     }
 
