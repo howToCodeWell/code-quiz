@@ -34,6 +34,10 @@ class AppFixtures extends Fixture
         }
     }
 
+    /**
+     * @param array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }} $questions
+     * @param Quiz $quiz
+     */
     public function createQuestions(array $questions, Quiz $quiz): void
     {
         foreach ($questions as $questionData) {
@@ -44,6 +48,10 @@ class AppFixtures extends Fixture
         }
     }
 
+    /**
+     * @param array{array{content: string, is_correct: boolean, display_order: integer}} $answers
+     * @param Question $question
+     */
     public function createAnswers(array $answers, Question $question): void
     {
         foreach ($answers as $answerData) {
