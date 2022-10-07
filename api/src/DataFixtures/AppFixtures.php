@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
         $quizData = [];
         $filePaths = $this->getFilePaths();
         foreach ($filePaths as $filePath) {
-            $quizData[] = require_once dirname(__DIR__) . '/../' . $filePath;
+            $quizData[] = require dirname(__DIR__) . '/../' . $filePath;
         }
 
         /**
