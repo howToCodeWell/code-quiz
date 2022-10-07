@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
         $this->createQuizes();
     }
 
-    public function createQuizes()
+    public function createQuizes(): void
     {
         $dataSets = $this->getDataSets();
 
@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         }
     }
 
-    public function createQuestions($questions, $quiz)
+    public function createQuestions(array $questions, Quiz $quiz): void
     {
         foreach ($questions as $questionData) {
             $question = $this->createQuestion($questionData, $quiz);
@@ -44,7 +44,7 @@ class AppFixtures extends Fixture
         }
     }
 
-    public function createAnswers($answers, $question)
+    public function createAnswers(array $answers, Question $question): void
     {
         foreach ($answers as $answerData) {
             $this->createAnswer($answerData, $question);
