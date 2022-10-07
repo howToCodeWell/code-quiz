@@ -13,13 +13,15 @@ final class AppFixturesTest extends TestCase
 {
 
     private $appFixtures;
+    private $objectManager;
 
     protected function setUp(): void
     {
         $objectManager = $this->getMockBuilder('Doctrine\Persistence\ObjectManager')
             ->onlyMethods(['flush', 'persist'])
             ->getMockForAbstractClass();
-
+        $this->objectManager = $objectManager;
+        
         $appFixtures = new AppFixtures;
         $appFixtures = $this->invokeProperty($appFixtures, 'objectManager', $objectManager);
         $this->appFixtures = $appFixtures;
@@ -33,6 +35,40 @@ final class AppFixturesTest extends TestCase
         $property->setValue($object, $parameter);
 
         return $object;
+    }
+
+    public function testLoad()
+    {
+        $loadFunction = $this->appFixtures->load($this->objectManager);
+
+        self::assertNull($loadFunction);
+    }
+
+    public function testCreateQuizzes()
+    {
+        $createQuizzesFunction = $this->appFixtures->createQuizzes();
+
+        self::assertNull($createQuizzesFunction);
+    }
+
+    public function testCreateQuestions()
+    {
+        $html = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes/html-quiz/quiz.php';
+
+        $quiz = new Quiz;
+        $quiz->setTitle('Test title');
+        $quiz->setSlug('test-slug');
+
+        self::assertNull($this->appFixtures->createQuestions($html['questions'], $quiz));
+    }
+
+    public function testCreateAnswers()
+    {
+        $question1 = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes/html-quiz/questions/question_1.php';
+        $question = new Question;
+        $question->setContent('Test content');
+
+        self::assertNull($this->appFixtures->createAnswers($question1[0]['answers'], $question));
     }
 
     public function testGetDataSets()
