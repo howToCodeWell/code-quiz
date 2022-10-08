@@ -94,13 +94,13 @@ export const JavaScriptAnswerFive: AnswerDTO[] = [
     {
         id: "2",
         content: "5",
-        is_correct: true,
+        is_correct: false,
         display_order: 2
     },
     {
         id: "3",
         content: "7",
-        is_correct: false,
+        is_correct: true,
         display_order: 3
     },
     {
