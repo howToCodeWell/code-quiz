@@ -59,7 +59,9 @@ final class AppFixturesTest extends TestCase
         $quiz->setTitle('Test title');
         $quiz->setSlug('test-slug');
 
-        self::assertNull($this->appFixtures->createQuestions($html['questions'], $quiz));
+        $createQuestionsFunction = $this->appFixtures->createQuestions($html['questions'], $quiz);
+
+        self::assertNull($createQuestionsFunction);
     }
 
     public function testCreateAnswers()
@@ -68,7 +70,9 @@ final class AppFixturesTest extends TestCase
         $question = new Question;
         $question->setContent('Test content');
 
-        self::assertNull($this->appFixtures->createAnswers($question1[0]['answers'], $question));
+        $createAnswersFunction = $this->appFixtures->createAnswers($question1[0]['answers'], $question);
+
+        self::assertNull($createAnswersFunction);
     }
 
     public function testGetDataSets()
