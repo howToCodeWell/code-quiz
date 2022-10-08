@@ -1,9 +1,9 @@
-import {QuizDTO} from "../../model/QuizDTO"
+import {Quiz} from "../../generated/openapi/src"
 import HTMLQuestions from "./htmlQuestions"
 
-const HTMLQuiz: QuizDTO =
+const HTMLQuiz: Quiz =
 {
-    id: "1",
+    id: 1,
     title: "HTML Quiz",
     slug: 'html-quiz',
     questions: HTMLQuestions

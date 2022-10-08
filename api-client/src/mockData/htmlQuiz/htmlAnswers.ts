@@ -1,50 +1,50 @@
-import {AnswerDTO} from "../../model/AnswerDTO"
+import {Answer} from "../../generated/openapi/src"
 
-export const HTMLAnswerOne: AnswerDTO[] = [
+export const HTMLAnswerOne: Answer[] = [
     {
-        id: "1",
+        id: 1,
         content: "Primary content",
-        is_correct: false,
-        display_order: 1
+        isCorrect: false,
+        displayOrder: 1
     },
     {
-        id: "2",
+        id: 2,
         content: "Empty content",
-        is_correct: false,
-        display_order: 2
+        isCorrect: false,
+        displayOrder: 2
     },
     {
-        id: "3",
+        id: 3,
         content: "Indirectly related content",
-        is_correct: true,
-        display_order: 3
+        isCorrect: true,
+        displayOrder: 3
     },
 ]
 
-export const HTMLAnswerTwo: AnswerDTO[] = [
+export const HTMLAnswerTwo: Answer[] = [
     {
-        id: "1",
+        id: 1,
         content: "4",
-        is_correct: false,
-        display_order: 1
+        isCorrect: false,
+        displayOrder: 1
     },
     {
-        id: "2",
+        id: 2,
         content: "6",
-        is_correct: true,
-        display_order: 2
+        isCorrect: true,
+        displayOrder: 2
     },
     {
-        id: "3",
+        id: 3,
         content: "8",
-        is_correct: false,
-        display_order: 3
+        isCorrect: false,
+        displayOrder: 3
     },
     {
-        id: "3",
+        id: 3,
         content: "Unlimited",
-        is_correct: false,
-        display_order: 4
+        isCorrect: false,
+        displayOrder: 4
     },
 ]
 
