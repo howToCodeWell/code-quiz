@@ -1,4 +1,6 @@
 {
-  "/": "/$1",
-  "/quiz/:slug": "/quiz?slug=:slug"
+  "/quizzes" :"/quiz",
+  "/*": "/$1",
+  "/quiz/:id": "/quiz/:id",
+  "/question/:id": "/question/:id"
 }
