@@ -9,6 +9,7 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QuizRepository::class)]
 #[ApiResource(
@@ -19,8 +20,9 @@ use Doctrine\ORM\Mapping as ORM;
         new Get(
             uriTemplate: '/quiz/{id}',
             requirements: ['id' => '\d+'],
-        )
-    ]
+        ),
+    ],
+    normalizationContext: ['groups' => ['read']]
 )]
 class Quiz
 {
@@ -30,15 +32,18 @@ class Quiz
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('read')]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('read')]
     private ?string $slug = null;
 
     /**
      * @var Collection<int, Question> $questions
      */
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class)]
+    #[Groups('read')]
     private Collection $questions;
 
     public function __construct()

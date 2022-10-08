@@ -8,6 +8,7 @@ use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     operations: [
@@ -15,7 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
             uriTemplate: '/question/{id}',
             requirements: ['id' => '\d+'],
         )
-    ]
+    ],
+    normalizationContext: ['groups' => ['question:read']]
 )]
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
@@ -27,15 +29,18 @@ class Question
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('question:read')]
     private ?Quiz $quiz = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('question:read')]
     private ?string $content = null;
 
     /**
      * @var Collection<int, Answer> $answers
      */
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
+    #[Groups('question:read')]
     private Collection $answers;
 
     public function __construct()

@@ -1,16 +1,63 @@
-import {Question} from "../../generated/openapi/src"
-import {HTMLAnswerOne, HTMLAnswerTwo} from "./htmlAnswers";
+import {QuestionJsonldQuestionRead} from "../../generated/openapi/src"
 
-const HTMLQuestions: Question[] = [
+const HTMLQuestions: QuestionJsonldQuestionRead[] = [
     {
-        id: 1,
+        context: "/api/v1/contexts/Question",
+        id: "/api/v1/question/1",
+        type: "Question",
         content: "What is the <aside> tag for?",
-        answers: HTMLAnswerOne,
+        answers: [
+            {
+                id: "/api/v1/answers/1",
+                type: "Answer",
+                content: "Primary content",
+                isCorrect: false,
+            },
+            {
+                id: "/api/v1/answers/2",
+                type: "Answer",
+                content: "Empty content",
+                isCorrect: false,
+            },
+            {
+                id: "/api/v1/answers/3",
+                type: "Answer",
+                content: "Indirectly related content",
+                isCorrect: true,
+            },
+        ],
     },
     {
-        id: 2,
+        context: "/api/v1/contexts/Question",
+        id: "/api/v1/question/2",
+        type: "Question",
         content: "How many HTML heading levels are there?",
-        answers: HTMLAnswerTwo,
+        answers: [
+            {
+                id: "/api/v1/answers/4",
+                type: "Answer",
+                content: "Primary content",
+                isCorrect: false,
+            },
+            {
+                id: "/api/v1/answers/5",
+                type: "Answer",
+                content: "Answer",
+                isCorrect: true,
+            },
+            {
+                id: "/api/v1/answers/6",
+                type: "Answer",
+                content: "Indirectly related content",
+                isCorrect: false,
+            },
+            {
+                id: "/api/v1/answers/7",
+                type: "Answer",
+                content: "Unlimited",
+                isCorrect: false,
+            },
+        ],
     },
 ]
 

@@ -1,12 +1,12 @@
-import {Quiz} from "../generated/openapi/src"
+import {QuizJsonldRead} from "../generated/openapi/src"
 import HTMLQuiz from "./htmlQuiz/htmlQuiz";
-import JavaScriptQuiz from "./javaScriptQuiz/javaScriptQuiz";
 import PythonQuiz from "./pythonQuiz/pythonQuiz";
+import JavaScriptQuiz from "./javaScriptQuiz/javaScriptQuiz";
 
-const quiz: Quiz[] = [
+const quiz: QuizJsonldRead[] = [
     HTMLQuiz,
-    // JavaScriptQuiz,
-    // PythonQuiz
+    PythonQuiz,
+    // JavaScriptQuiz
 ]
 
 export default quiz

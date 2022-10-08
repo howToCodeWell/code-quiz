@@ -1,7 +1,10 @@
 import * as dotenv from "dotenv"
 import * as jsonServer from "json-server"
-import data from "../mockData"
+// import data from "../mockData"
 import routes from "../routes.json"
+import HTMLQuiz from "../mockData/htmlQuiz/htmlQuiz";
+import HTMLQuestions from "../mockData/htmlQuiz/htmlQuestions";
+import data from "../mockData";
 
 export function mockApp() {
     dotenv.config()
@@ -13,6 +16,16 @@ export function mockApp() {
     server.use(jsonServer.rewriter(rules))
     const router = jsonServer.router(data)
     const middlewares = jsonServer.defaults()
+
+    server.get('/quiz/*', (req, res) => {
+        const id = (req.params[0])
+        res.jsonp(data.quiz[id -1])
+    })
+
+    server.get('/question/*', (req, res) => {
+        const id = (req.params[0])
+        res.jsonp(data.question[id -1])
+    })
 
     server.use(middlewares)
     server.use(router)
