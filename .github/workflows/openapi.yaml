@@ -41,7 +41,7 @@ jobs:
 
       - name: Generate openapi.yaml in
         working-directory: ./api
-        run: docker-compose exec api bash -c "bin/console api:openapi:export --yaml" > ../docs/generated/openapi.yaml
+        run: docker-compose exec -T api bash -c "bin/console api:openapi:export --yaml" > ../docs/generated/openapi.yaml
 
       - name: Archive openapi artifacts
         uses: actions/upload-artifact@v3
