@@ -10,9 +10,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    /** @var \Doctrine\Persistence\ObjectManager $objectManager */
+    /** @var ObjectManager */
     private $objectManager;
 
+    /**
+     * @param ObjectManager
+     */
     public function load(ObjectManager $manager): void
     {
         $this->objectManager = $manager;
