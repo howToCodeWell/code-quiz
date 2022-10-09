@@ -1,12 +1,19 @@
-import {QuizDTO} from "../../model/QuizDTO"
-import HTMLQuestions from "./htmlQuestions"
+import {
+    QuizJsonldRead
+} from "../../generated/openapi"
 
-const HTMLQuiz: QuizDTO =
-{
-    id: "1",
-    title: "HTML Quiz",
-    slug: 'html-quiz',
-    questions: HTMLQuestions
-}
+const HTMLQuiz: QuizJsonldRead =
+    {
+        '@context': "/api/v1/contexts/Quiz",
+        '@id': "/api/v1/quizzes",
+        '@type': "Quiz",
+        title: "HTML Quiz",
+        slug: 'html-quiz',
+        questions: [
+            "/api/v1/question/1",
+            "/api/v1/question/2"
+        ]
+    }
+
 
 export default HTMLQuiz

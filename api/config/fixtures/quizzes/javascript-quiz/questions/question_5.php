@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'How many kinds of loops are there in JavaScript?',
-        'quiz'=> 'quiz-slug-javascript-quiz',
+        'quiz' => 'quiz-slug-javascript-quiz',
         'answers' => [
             [
                 'content' => '3',

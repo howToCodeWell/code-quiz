@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'What does PEP stand for in Python? Python ____ _____',
-        'quiz'=> 'quiz-slug-python-quiz',
+        'quiz' => 'quiz-slug-python-quiz',
         'answers' => [
             [
                 'content' => 'Empty path',

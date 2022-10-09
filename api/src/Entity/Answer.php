@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
+#[ApiResource(
+    operations: [],
+    normalizationContext: ['groups' => ['read']]
+)]
 class Answer
 {
     #[ORM\Id]
@@ -15,15 +21,19 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('question:read')]
     private ?Question $question = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('question:read')]
     private ?string $content = null;
 
     #[ORM\Column]
+    #[Groups('question:read')]
     private ?bool $is_correct = null;
 
     #[ORM\Column]
+    #[Groups('read')]
     private ?int $display_order = null;
 
     public function getId(): ?int

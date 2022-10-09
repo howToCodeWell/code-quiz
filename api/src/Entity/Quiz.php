@@ -16,35 +16,34 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new GetCollection(
             paginationEnabled: false,
-            normalizationContext:  ['groups' => 'quiz:list'],
         ),
         new Get(
             uriTemplate: '/quiz/{id}',
             requirements: ['id' => '\d+'],
-            normalizationContext:  ['groups' => 'quiz:item'],
-        )
-    ]
+        ),
+    ],
+    normalizationContext: ['groups' => ['read']]
 )]
 class Quiz
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['quiz:list', 'quiz:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['quiz:list', 'quiz:item'])]
+    #[Groups('read')]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['quiz:list', 'quiz:item'])]
+    #[Groups('read')]
     private ?string $slug = null;
 
     /**
      * @var Collection<int, Question> $questions
      */
     #[ORM\OneToMany(mappedBy: 'quiz', targetEntity: Question::class)]
+    #[Groups('read')]
     private Collection $questions;
 
     public function __construct()

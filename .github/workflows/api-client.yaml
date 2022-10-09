@@ -35,13 +35,27 @@ jobs:
         working-directory: ./api-client
         run: cp .env.sample .env
 
+      - name: Download a openapi_spec
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: openapi_spec_artifact
+          workflow: openapi.yaml
+          workflow_conclusion: success
+          path: ./docs/generated
+
+      - name: Generating Typescript API
+        working-directory: ./api-client
+        run: yarn run generate-api
+
       - name: Lint
         working-directory: ./api-client
         run: yarn run lint
+        shell: bash
 
       - name: Unit tests
         working-directory: ./api-client
         run: yarn run test
+        shell: bash
 
   after-tests:
     needs: tests # run after tests

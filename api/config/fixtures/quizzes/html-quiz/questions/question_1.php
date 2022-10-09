@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'What is the <aside> tag for?',
-        'quiz'=> 'quiz-slug-html-quiz',
+        'quiz' => 'quiz-slug-html-quiz',
         'answers' => [
             [
                 'content' => 'Primary content',

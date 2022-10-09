@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'Are Python Tuples mutable?',
-        'quiz'=> 'quiz-slug-python-quiz',
+        'quiz' => 'quiz-slug-python-quiz',
         'answers' => [
             [
                 'content' => 'Yes',

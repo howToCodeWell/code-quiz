@@ -17,6 +17,6 @@ describe('API Request /quiz', () => {
 
     it('Should have more than 1 quiz', async () => {
         const response = await getAll()
-        expect(response.data.length).toBeGreaterThan(1)
+        expect(Object.keys(response.data).length).toBeGreaterThan(1)
     })
 })

@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'How many HTML heading levels are there?',
-        'quiz'=> 'quiz-slug-html-quiz',
+        'quiz' => 'quiz-slug-html-quiz',
         'answers' => [
             [
                 'content' => '4',

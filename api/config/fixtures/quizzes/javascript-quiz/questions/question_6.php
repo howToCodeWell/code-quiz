@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'Which HTML elements contain JavaScript?',
-        'quiz'=> 'quiz-slug-javascript-quiz',
+        'quiz' => 'quiz-slug-javascript-quiz',
         'answers' => [
             [
                 'content' => '<JavaScript>',

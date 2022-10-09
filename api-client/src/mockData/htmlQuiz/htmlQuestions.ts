@@ -1,16 +1,63 @@
-import {QuestionDTO} from "../../model/QuestionDTO"
-import {HTMLAnswerOne, HTMLAnswerTwo} from "./htmlAnswers";
+import {QuestionJsonldQuestionRead} from "../../generated/openapi"
 
-const HTMLQuestions: QuestionDTO[] = [
+const HTMLQuestions: QuestionJsonldQuestionRead[] = [
     {
-        id: "1",
+        '@context': "/api/v1/contexts/Question",
+        '@id': "/api/v1/question/1",
+        '@type': "Question",
         content: "What is the <aside> tag for?",
-        answers: HTMLAnswerOne,
+        answers: [
+            {
+                '@id': "/api/v1/answers/1",
+                '@type': "Answer",
+                content: "Primary content",
+                is_correct: false,
+            },
+            {
+                '@id': "/api/v1/answers/2",
+                '@type': "Answer",
+                content: "Empty content",
+                is_correct: false,
+            },
+            {
+                '@id': "/api/v1/answers/3",
+                '@type': "Answer",
+                content: "Indirectly related content",
+                is_correct: true,
+            },
+        ],
     },
     {
-        id: "2",
+        '@context': "/api/v1/contexts/Question",
+        '@id': "/api/v1/question/2",
+        '@type': "Question",
         content: "How many HTML heading levels are there?",
-        answers: HTMLAnswerTwo,
+        answers: [
+            {
+                '@id': "/api/v1/answers/4",
+                '@type': "Answer",
+                content: "Primary content",
+                is_correct: false,
+            },
+            {
+                '@id': "/api/v1/answers/5",
+                '@type': "Answer",
+                content: "Answer",
+                is_correct: true,
+            },
+            {
+                '@id': "/api/v1/answers/6",
+                '@type': "Answer",
+                content: "Indirectly related content",
+                is_correct: false,
+            },
+            {
+                '@id': "/api/v1/answers/7",
+                '@type': "Answer",
+                content: "Unlimited",
+                is_correct: false,
+            },
+        ],
     },
 ]
 
