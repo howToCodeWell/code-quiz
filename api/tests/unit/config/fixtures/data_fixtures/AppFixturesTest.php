@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\unit\config\fixtures\data_fixtures;
 
 use App\DataFixtures\AppFixtures;
+use App\Entity\Answer;
 use App\Entity\Question;
 use App\Entity\Quiz;
 use Doctrine\Persistence\ObjectManager;
@@ -112,7 +113,7 @@ final class AppFixturesTest extends TestCase
 
         $result = $this->appFixtures->createQuiz($data);
 
-        self::assertInstanceOf("App\Entity\Quiz", $result);
+        self::assertInstanceOf(Quiz::class, $result);
         self::assertEquals("Test Quiz Title", $result->getTitle());
         self::assertEquals("test-quiz-title", $result->getSlug());
     }
@@ -128,8 +129,8 @@ final class AppFixturesTest extends TestCase
 
         $result = $this->appFixtures->createQuestion($data, $quiz);
 
-        self::assertInstanceOf("App\Entity\Question", $result);
-        self::assertInstanceOf("App\Entity\Quiz", $result->getQuiz());
+        self::assertInstanceOf(Question::class, $result);
+        self::assertInstanceOf(Quiz::class, $result->getQuiz());
         self::assertEquals(10, $result->getQuiz()->getId());
         self::assertEquals("Test quiz content", $result->getContent());
     }
@@ -147,7 +148,7 @@ final class AppFixturesTest extends TestCase
 
         $result = $this->appFixtures->CreateAnswer($data, $question);
 
-        self::assertInstanceOf("App\Entity\Answer", $result);
+        self::assertInstanceOf(Answer::class, $result);
         self::assertEquals(10, $result->getQuestion()->getId());
         self::assertEquals("Test answer content", $result->getContent());
         self::assertEquals(3, $result->getDisplayOrder());
