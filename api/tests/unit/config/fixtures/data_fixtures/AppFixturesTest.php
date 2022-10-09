@@ -10,6 +10,7 @@ use App\Entity\Quiz;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 final class AppFixturesTest extends TestCase
 {
@@ -33,7 +34,7 @@ final class AppFixturesTest extends TestCase
 
     public function invokeProperty(object &$object, string $propertyName, mixed $parameter): object
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass(get_class($object));
         $property = $reflection->getProperty($propertyName);
         $property->setAccessible(true);
         $property->setValue($object, $parameter);
