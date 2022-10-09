@@ -32,6 +32,11 @@ final class AppFixturesTest extends TestCase
         $this->appFixtures = $appFixtures;
     }
 
+    /**
+     * @param object $object
+     * @param string $propertyName
+     * @param mixed $parameter
+     */
     public function invokeProperty(object &$object, string $propertyName, mixed $parameter): object
     {
         $reflection = new ReflectionClass(get_class($object));
