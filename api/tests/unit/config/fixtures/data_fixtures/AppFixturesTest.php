@@ -74,9 +74,13 @@ final class AppFixturesTest extends TestCase
         $quiz->setTitle('Test title');
         $quiz->setSlug('test-slug');
 
-        $createQuestionsFunction = $this->appFixtures->createQuestions($html['questions'], $quiz);
+        $createdQuestions = $this->appFixtures->createQuestions($html['questions'], $quiz);
 
-        self::assertNull($createQuestionsFunction);
+        self::assertIsArray($createdQuestions);
+
+        foreach ($createdQuestions as $question) {
+            self::assertInstanceOf(Question::class, $question);
+        }
     }
 
     public function testCreateAnswers()
