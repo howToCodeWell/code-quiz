@@ -39,7 +39,7 @@ jobs:
         working-directory: ./api
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api bin/console --no-interaction doctrine:migration:migrate
 
-      - name: Generate openapi.yaml in
+      - name: Generate openapi.yaml
         working-directory: ./api
         run: docker-compose exec -T api bash -c "bin/console api:openapi:export --yaml" > ../docs/generated/openapi.yaml
 
@@ -82,17 +82,17 @@ jobs:
   # make sure it has a unique name! this will always run, but
   # after the tests & after-tests steps or the dummy step in case
   # the API was not modified
-  ci_api:
+  ci_openapi:
     runs-on: ubuntu-20.04
     if: always()
     needs: [build, after-build, dummy-step]
     steps:
       - run: |
-          passed="${{ needs.after-tests.outputs.success || needs.dummy-step.outputs.success }}"
+          passed="${{ needs.after-build.outputs.success || needs.dummy-step.outputs.success }}"
           if [[ $passed == "true" ]]; then
-            echo "Tests passed"
+            echo "Build passed"
             exit 0
           else
-            echo "Tests failed"
+            echo "Build failed"
             exit 1
           fi
