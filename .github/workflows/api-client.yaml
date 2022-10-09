@@ -42,6 +42,10 @@ jobs:
           workflow: openapi.yaml
           workflow_conclusion: success
 
+      - name: Generating Typescript API
+        working-directory: ./api-client
+        run: yarn run generate-api
+
       - name: Lint
         working-directory: ./api-client
         run: yarn run lint
