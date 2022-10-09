@@ -42,9 +42,9 @@ jobs:
 
       - name: Unit tests
         working-directory: ./api-client
-#        run: yarn run test
-        shell: bash
-        run: exit 1
+        run: yarn run test
+#        shell: bash
+#        run: exit 1
 
   after-tests:
     needs: tests # run after tests
