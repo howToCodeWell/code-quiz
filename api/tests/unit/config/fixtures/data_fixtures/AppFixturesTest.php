@@ -7,6 +7,7 @@ namespace App\Tests\unit\config\fixtures\data_fixtures;
 use App\DataFixtures\AppFixtures;
 use App\Entity\Question;
 use App\Entity\Quiz;
+use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 
 final class AppFixturesTest extends TestCase
@@ -17,7 +18,7 @@ final class AppFixturesTest extends TestCase
 
     protected function setUp(): void
     {
-        $objectManager = $this->getMockBuilder('Doctrine\Persistence\ObjectManager')
+        $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->onlyMethods(['flush', 'persist'])
             ->getMockForAbstractClass();
         $this->objectManager = $objectManager;
