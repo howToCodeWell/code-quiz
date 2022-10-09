@@ -67,12 +67,17 @@ class AppFixtures extends Fixture
     /**
      * @param array{array{content: string, is_correct: boolean, display_order: integer}} $answers
      * @param Question $question
+     * @return array<int, Answer> $createdAnswers
      */
-    public function createAnswers(array $answers, Question $question): void
+    public function createAnswers(array $answers, Question $question): array
     {
+        $createdAnswers = [];
         foreach ($answers as $answerData) {
-            $this->createAnswer($answerData, $question);
+            $answer = $this->createAnswer($answerData, $question);
+            $createdAnswers[] = $answer;
         }
+
+        return $createdAnswers;
     }
 
     /**

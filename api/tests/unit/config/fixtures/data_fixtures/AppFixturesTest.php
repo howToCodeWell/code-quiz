@@ -89,9 +89,13 @@ final class AppFixturesTest extends TestCase
         $question = new Question;
         $question->setContent('Test content');
 
-        $createAnswersFunction = $this->appFixtures->createAnswers($question1[0]['answers'], $question);
+        $createdAnswers = $this->appFixtures->createAnswers($question1[0]['answers'], $question);
 
-        self::assertNull($createAnswersFunction);
+        self::assertIsArray($createdAnswers);
+
+        foreach ($createdAnswers as $answer) {
+            self::assertInstanceOf(Answer::class, $answer);
+        }
     }
 
     public function testGetDataSets()
