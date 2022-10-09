@@ -57,11 +57,11 @@ final class AppFixturesTest extends TestCase
 
     public function testCreateQuizzes()
     {
-        $quizzes = $this->appFixtures->createQuizzes();
+        $createdQuizzes = $this->appFixtures->createQuizzes();
 
-        self::assertIsArray($quizzes);
+        self::assertIsArray($createdQuizzes);
 
-        foreach ($quizzes as $quiz) {
+        foreach ($createdQuizzes as $quiz) {
             self::assertInstanceOf(Quiz::class, $quiz);
         }
     }
