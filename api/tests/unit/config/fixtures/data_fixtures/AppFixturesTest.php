@@ -89,9 +89,13 @@ final class AppFixturesTest extends TestCase
 
     public function testGetFilePathsMethod()
     {
-        $result = $this->appFixtures->getFilePaths();
+        $filePaths = $this->appFixtures->getFilePaths();
 
-        self::assertIsArray($result);
+        self::assertIsArray($filePaths);
+
+        foreach ($filePaths as $filePath) {
+            self::assertFileExists($filePath);
+        }
     }
 
     public function testCreateQuiz()
