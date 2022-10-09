@@ -37,7 +37,6 @@ jobs:
 
       - name: Download a openapi_spec
         uses: dawidd6/action-download-artifact@v2
-        working-directory: ./
         with:
           name: openapi_spec_artifact
           workflow: openapi.yaml
