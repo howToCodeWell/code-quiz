@@ -23,8 +23,12 @@ class AppFixtures extends Fixture
         $this->createQuizzes();
     }
 
-    public function createQuizzes(): void
+    /**
+     * @return array<int, Quiz> $createdQuizzes
+     */
+    public function createQuizzes(): array
     {
+        $createdQuizzes = [];
         $dataSets = $this->getDataSets();
 
         foreach ($dataSets as $quizData) {
@@ -34,7 +38,10 @@ class AppFixtures extends Fixture
             $this->createQuestions($questions, $quiz);
 
             $this->objectManager->flush();
+            $createdQuizzes[] = $quiz;
         }
+
+        return $createdQuizzes;
     }
 
     /**
