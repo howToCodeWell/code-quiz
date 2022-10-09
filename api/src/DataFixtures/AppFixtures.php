@@ -10,34 +10,85 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    /** @var ObjectManager */
+    private $objectManager;
+
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager): void
     {
+        $this->objectManager = $manager;
+
+        $this->createQuizzes();
+    }
+
+    /**
+     * @return array<int, Quiz> $createdQuizzes
+     */
+    public function createQuizzes(): array
+    {
+        $createdQuizzes = [];
         $dataSets = $this->getDataSets();
+
         foreach ($dataSets as $quizData) {
-            $quiz = $this->createQuiz($manager, $quizData);
+            $quiz = $this->createQuiz($quizData);
             $questions = $quizData['questions'];
 
-            foreach ($questions as $questionData) {
-                $question = $this->createQuestion($manager, $questionData, $quiz);
-                $answers = $questionData['answers'];
-                foreach ($answers as $answerData) {
-                    $this->createAnswer($manager, $answerData, $question);
-                }
-            }
+            $this->createQuestions($questions, $quiz);
 
-            $manager->flush();
+            $this->objectManager->flush();
+            $createdQuizzes[] = $quiz;
         }
+
+        return $createdQuizzes;
+    }
+
+    /**
+     * @param array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }} $questions
+     * @param Quiz $quiz
+     * @return array<int, Question> $createdQuestions
+     */
+    public function createQuestions(array $questions, Quiz $quiz): array
+    {
+        $createdQuestions = [];
+        foreach ($questions as $questionData) {
+            $question = $this->createQuestion($questionData, $quiz);
+            $answers = $questionData['answers'];
+
+            $this->createAnswers($answers, $question);
+
+            $createdQuestions[] = $question;
+        }
+
+        return $createdQuestions;
+    }
+
+    /**
+     * @param array{array{content: string, is_correct: boolean, display_order: integer}} $answers
+     * @param Question $question
+     * @return array<int, Answer> $createdAnswers
+     */
+    public function createAnswers(array $answers, Question $question): array
+    {
+        $createdAnswers = [];
+        foreach ($answers as $answerData) {
+            $answer = $this->createAnswer($answerData, $question);
+            $createdAnswers[] = $answer;
+        }
+
+        return $createdAnswers;
     }
 
     /**
      * @return array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}}
      */
-    protected function getDataSets(): array
+    public function getDataSets(): array
     {
         $quizData = [];
         $filePaths = $this->getFilePaths();
         foreach ($filePaths as $filePath) {
-            $quizData[] = require_once dirname(__DIR__) . '/../' . $filePath;
+            $quizData[] = require dirname(__DIR__) . '/../' . $filePath;
         }
 
         /**
@@ -49,53 +100,51 @@ class AppFixtures extends Fixture
     /**
      * @return string[]
      */
-    protected function getFilePaths(): array
+    public function getFilePaths(): array
     {
         return [
             'config/fixtures/quizzes/html-quiz/quiz.php',
+            'config/fixtures/quizzes/javascript-quiz/quiz.php',
             'config/fixtures/quizzes/python-quiz/quiz.php'
         ];
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{title: string, slug: string} $data
      * @return Quiz
      */
-    protected function createQuiz(ObjectManager $manager, array $data): Quiz
+    public function createQuiz(array $data): Quiz
     {
         $entity = new Quiz();
         $entity->setTitle($data['title'])
             ->setSlug($data['slug']);
 
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{content: string} $data
      * @param Quiz $quiz
      * @return Question
      */
-    protected function createQuestion(ObjectManager $manager, array $data, Quiz $quiz): Question
+    public function createQuestion(array $data, Quiz $quiz): Question
     {
         $entity = new Question();
         $entity->setContent($data['content'])
             ->setQuiz($quiz);
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }
 
     /**
-     * @param ObjectManager $manager
      * @param array{content: string, display_order: integer, is_correct: boolean} $data
      * @param Question $question
      * @return Answer
      */
-    protected function createAnswer(ObjectManager $manager, array $data, Question $question): Answer
+    public function createAnswer(array $data, Question $question): Answer
     {
         $entity = new Answer();
         $entity
@@ -104,7 +153,7 @@ class AppFixtures extends Fixture
             ->setIsCorrect($data['is_correct'])
             ->setQuestion($question);
 
-        $manager->persist($entity);
+        $this->objectManager->persist($entity);
 
         return $entity;
     }

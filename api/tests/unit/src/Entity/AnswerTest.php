@@ -13,7 +13,7 @@ class AnswerTest extends TestCase
         self::assertEmpty($entity->getContent());
         self::assertNull($entity->getQuestion());
         self::assertNull($entity->getId());
-        self::assertNull($entity->isIsCorrect());
+        self::assertNull($entity->getIsCorrect());
         self::assertNull($entity->getDisplayOrder());
     }
 
@@ -38,7 +38,7 @@ class AnswerTest extends TestCase
         $value = true;
         $entity = new Answer();
         $entity->setIsCorrect($value);
-        self::assertTrue($entity->isIsCorrect());
+        self::assertTrue($entity->getIsCorrect());
     }
 
     public function testSettingQuestion()
