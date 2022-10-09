@@ -1,6 +1,6 @@
 # A lot of this was inspired by https://brunoscheufler.com/blog/2022-04-24-required-github-actions-jobs-in-a-monorepo
 
-name: openapi
+name: OpenAPI spec
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ jobs:
   change-detection:
     runs-on: ubuntu-latest
     outputs:
-      api: ${{ steps.changes.outputs.api }}
+      openapi: ${{ steps.changes.outputs.openapi }}
     steps:
       - uses: dorny/paths-filter@v2
         id: changes
