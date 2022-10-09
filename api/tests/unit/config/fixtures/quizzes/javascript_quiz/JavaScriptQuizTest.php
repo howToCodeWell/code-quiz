@@ -12,5 +12,4 @@ class JavaScriptQuizTest extends TestCase
 
         self::assertIsArray($quiz);
     }
-
 }

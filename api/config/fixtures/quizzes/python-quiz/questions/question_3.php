@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'What do Python generators create?',
-        'quiz'=> 'quiz-slug-python-quiz',
+        'quiz' => 'quiz-slug-python-quiz',
         'answers' => [
             [
                 'content' => 'Iterator objects',

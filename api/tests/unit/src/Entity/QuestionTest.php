@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Tests\unit\src\Entity;
 
 use App\Entity\Answer;

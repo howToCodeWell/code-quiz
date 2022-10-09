@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'How many types of popup boxes does JavaScript have?',
-        'quiz'=> 'quiz-slug-javascript-quiz',
+        'quiz' => 'quiz-slug-javascript-quiz',
         'answers' => [
             [
                 'content' => '1',

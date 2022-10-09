@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'How many expressions can a Python Lambda function have?',
-        'quiz'=> 'quiz-slug-python-quiz',
+        'quiz' => 'quiz-slug-python-quiz',
         'answers' => [
             [
                 'content' => '3',

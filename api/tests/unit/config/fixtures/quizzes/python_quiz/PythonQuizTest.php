@@ -12,5 +12,4 @@ class PythonQuizTest extends TestCase
 
         self::assertIsArray($quiz);
     }
-
 }

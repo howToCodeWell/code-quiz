@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'What is __init__ in Python?',
-        'quiz'=> 'quiz-slug-python-quiz',
+        'quiz' => 'quiz-slug-python-quiz',
         'answers' => [
             [
                 'content' => 'Install method',

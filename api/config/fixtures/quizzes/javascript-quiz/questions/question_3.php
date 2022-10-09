@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'What does ‘this’ refer to in a JavaScript object method?',
-        'quiz'=> 'quiz-slug-javascript-quiz',
+        'quiz' => 'quiz-slug-javascript-quiz',
         'answers' => [
             [
                 'content' => 'The object',

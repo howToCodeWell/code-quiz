@@ -6,7 +6,7 @@
 $question = [
     [
         'content' => 'Is JavaScript a case sensitive programming language?',
-        'quiz'=> 'quiz-slug-javascript-quiz',
+        'quiz' => 'quiz-slug-javascript-quiz',
         'answers' => [
             [
                 'content' => 'Yes',
