@@ -8,12 +8,15 @@ use App\DataFixtures\AppFixtures;
 use App\Entity\Question;
 use App\Entity\Quiz;
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class AppFixturesTest extends TestCase
 {
-
+    /** @var AppFixtures */
     private $appFixtures;
+
+    /** @var MockObject|ObjectManager */
     private $objectManager;
 
     protected function setUp(): void
