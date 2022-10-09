@@ -39,6 +39,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: openapi_spec_artifact
+          workflow: openapi.yaml
+          workflow_conclusion: success
 
       - name: Lint
         working-directory: ./api-client
