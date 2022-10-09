@@ -20,9 +20,9 @@ jobs:
           filters: |
             openapi:
               - 'api/src/Entity/**'
-  tests:
+  build:
     needs: change-detection
-    if: needs.change-detection.outputs.api == 'true'
+    if: needs.change-detection.outputs.openapi == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -55,8 +55,8 @@ jobs:
         if: always()
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml down
 
-  after-tests:
-    needs: tests # run after tests
+  after-build:
+    needs: build # run after tests
     runs-on: ubuntu-latest
     if: success() # only run when all test have passed
     # store success output flag for ci job
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: change-detection
     # runs if API was not changed
-    if: needs.change-detection.outputs.api == 'false'
+    if: needs.change-detection.outputs.openapi == 'false'
     outputs:
       success: ${{ steps.setoutput.outputs.success }}
     steps:
@@ -85,7 +85,7 @@ jobs:
   ci_api:
     runs-on: ubuntu-20.04
     if: always()
-    needs: [tests, after-tests, dummy-step]
+    needs: [build, after-build, dummy-step]
     steps:
       - run: |
           passed="${{ needs.after-tests.outputs.success || needs.dummy-step.outputs.success }}"
