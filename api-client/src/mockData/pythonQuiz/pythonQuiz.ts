@@ -1,11 +1,10 @@
-import {
-    QuizJsonldRead,
-} from "../../generated/openapi/src"
+import {QuizJsonldRead} from "../../generated/openapi"
 
 const PythonQuiz: QuizJsonldRead =
     {
-        id: "/api/v1/quiz/3",
-        type: "Quiz",
+        '@context': "/api/v1/contexts/Quiz",
+        '@id': "/api/v1/quiz/3",
+        '@type': "Quiz",
         title: "Python Quiz",
         slug: 'python-quiz',
         questions: [

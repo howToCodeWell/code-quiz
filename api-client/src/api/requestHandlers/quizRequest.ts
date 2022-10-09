@@ -1,5 +1,9 @@
-import {axiosClient} from "../apiClient";
+import apiClient from "../apiClient";
+
+export function getById(id: string) {
+    return apiClient.quizAPI.apiQuizIdGet(id)
+}
 
 export function getAll() {
-    return axiosClient.get('/quiz')
+    return apiClient.quizAPI.apiQuizzesGetCollection()
 }

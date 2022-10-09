@@ -1,9 +1,6 @@
 import * as dotenv from "dotenv"
 import * as jsonServer from "json-server"
-// import data from "../mockData"
 import routes from "../routes.json"
-import HTMLQuiz from "../mockData/htmlQuiz/htmlQuiz";
-import HTMLQuestions from "../mockData/htmlQuiz/htmlQuestions";
 import data from "../mockData";
 
 export function mockApp() {
