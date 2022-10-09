@@ -36,7 +36,7 @@ jobs:
         run: cp .env.sample .env
 
       - name: Download a openapi_spec
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
           name: openapi_spec_artifact
           workflow: openapi.yaml
