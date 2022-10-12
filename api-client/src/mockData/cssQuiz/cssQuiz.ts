@@ -3,16 +3,16 @@ import {QuizJsonldRead} from "../../generated/openapi"
 const CSSQuiz: QuizJsonldRead =
     {
         '@context': "/api/v1/contexts/Quiz",
-        '@id': "/api/v1/quizzes",
+        '@id': "/api/v1/quiz/4",
         '@type': "Quiz",
         title: "CSS Quiz",
         slug: 'css-quiz',
         questions: [
-            "/api/v1/question/1",
-            "/api/v1/question/2",
-            "/api/v1/question/3",
-            "/api/v1/question/4",
-            "/api/v1/question/5",            
+            "/api/v1/question/15",
+            "/api/v1/question/16",
+            "/api/v1/question/17",
+            "/api/v1/question/18",
+            "/api/v1/question/19",            
         ]
     }
 

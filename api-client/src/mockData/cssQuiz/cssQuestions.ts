@@ -3,7 +3,7 @@ import {QuestionJsonldQuestionRead} from "../../generated/openapi"
 const CSSQuestions: QuestionJsonldQuestionRead[] = [
     {
         '@context': "/api/v1/contexts/Question",
-        '@id': "/api/v1/question/1",
+        '@id': "/api/v1/question/15",
         '@type': "Question",
         content: "How many padding properties are there in CSS?",
         answers: [
@@ -29,7 +29,7 @@ const CSSQuestions: QuestionJsonldQuestionRead[] = [
     },
     {
         '@context': "/api/v1/contexts/Question",
-        '@id': "/api/v1/question/2",
+        '@id': "/api/v1/question/16",
         '@type': "Question",
         content: "In CSS which rule overrides a previous style?",
         answers: [
@@ -55,7 +55,7 @@ const CSSQuestions: QuestionJsonldQuestionRead[] = [
     },
     {
         '@context': "/api/v1/contexts/Question",
-        '@id': "/api/v1/question/3",
+        '@id': "/api/v1/question/17",
         '@type': "Question",
         content: "In CSS which property controls the text font?",
         answers: [
@@ -87,7 +87,7 @@ const CSSQuestions: QuestionJsonldQuestionRead[] = [
     },
     {
         '@context': "/api/v1/contexts/Question",
-        '@id': "/api/v1/question/4",
+        '@id': "/api/v1/question/18",
         '@type': "Question",
         content: "What controls a repeating background in CSS?",
         answers: [
@@ -119,7 +119,7 @@ const CSSQuestions: QuestionJsonldQuestionRead[] = [
     },
     {
         '@context': "/api/v1/contexts/Question",
-        '@id': "/api/v1/question/5",
+        '@id': "/api/v1/question/19",
         '@type': "Question",
         content: "In #css how would you remove an underline from a hyperlink?",
         answers: [
