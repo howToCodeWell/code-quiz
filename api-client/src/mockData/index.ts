@@ -4,6 +4,8 @@ import pythonQuiz from "./pythonQuiz/pythonQuiz";
 import pythonQuestions from "./pythonQuiz/pythonQuestions";
 import JavaScriptQuiz from "./javaScriptQuiz/javaScriptQuiz";
 import javaScriptQuestions from "./javaScriptQuiz/javaScriptQuestions";
+import cssQuiz from "./cssQuiz/cssQuiz";
+import cssQuestions from "./cssQuiz/cssQuestions";
 
 
 const data = {
@@ -11,8 +13,14 @@ const data = {
         htmlQuiz,
         JavaScriptQuiz,
         pythonQuiz,
+        cssQuiz,
     ],
-    question: [...htmlQuestions, ...javaScriptQuestions, ...pythonQuestions]
+    question: [
+        ...htmlQuestions,
+        ...javaScriptQuestions,
+        ...pythonQuestions,
+        ...cssQuestions
+    ]
 }
 
 export default data
