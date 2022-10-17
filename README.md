@@ -25,15 +25,94 @@ Pull requests may be  reviewed live on Twitch/YouTube.
 
 See the [CONTRIBUTING](CONTRIBUTING.md) guide on how to contribute to the project.
 
+---
 
-## API
+## System Requirements
 
-To install the API please read the [wiki page](https://github.com/howToCodeWell/code-quiz/wiki/API)
+- Docker
+- Docker Compose
+- Node
+- NPM
+- Yarn
 
-## Database
-Please read the [wiki page](https://github.com/howToCodeWell/code-quiz/wiki/Database) on how to access and use the database.
+---
 
-# API Client
+## Local Install
 
-To install the API client please read the  [API-Client wiki page](https://github.com/howToCodeWell/code-quiz/wiki/API-Client)
+1. Clone the repository
+```bash
+git clone git@github.com:howToCodeWell/code-quiz.git
+```
 
+2. Spin up the containers
+
+```bash
+docker-compose up -d
+```
+
+3. Install database migrations
+```bash
+docker-compose exec api bin/console doctrine:migration:migrate
+```
+
+4. Load data fixtures
+```bash
+docker-compose exec api bin/console doctrine:fixtures:load
+```
+
+5. Add the following entry to the `/etc/hosts`
+
+```bash
+127.0.0.1 codequiz.local
+127.0.0.1 api.codequiz.local
+```
+
+## Generating the OpenAPI specification
+From the `api` folder run the following to create `openapi.yaml` in the `./docs/generated` folder.  This is ignored from the code base
+```bash
+docker-compose exec api bash -c "bin/console api:openapi:export --yaml" > ./docs/generated/openapi.yaml
+```
+
+## Accessing the projects
+
+- The API can be reached at [http://api.codequiz.local/api/v1](http://api.codequiz.local/api/v1)
+- The website can be reached at [http://codequiz.local/](http://codequiz.local/)
+
+---
+
+# Running the API Client locally
+
+## Install
+
+1. Install the packages
+```
+yarn install
+```
+
+2. Run the mock server
+```
+yarn start
+```
+
+3. Generate the OpenAPI TypeScript module
+   Make sure you have already generated the openapi spec file.
+
+[See this guide for details](https://github.com/howToCodeWell/code-quiz/wiki/API#generating-the-openapi-specification)
+```
+yarn run generate-api 
+```
+
+## Testing
+
+```
+yarn run lint
+```
+
+```
+yarn run test
+```
+
+--- 
+# Mobile App
+
+Yet to be built
