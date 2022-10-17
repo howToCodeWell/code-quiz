@@ -73,6 +73,16 @@ From the `api` folder run the following to create `openapi.yaml` in the `./docs/
 docker-compose exec api bash -c "bin/console api:openapi:export --yaml" > ./docs/generated/openapi.yaml
 ```
 
+## Install database and data
+1. Run the migrations
+```bash
+docker-compose exec api bash -c 'bin/console doctrine:migrations:migrate'
+```
+
+2. Run the data fixtures
+```bash
+docker-compose exec api bash -c 'bin/console doctrine:fixtures:load' 
+```
 ## Accessing the projects
 
 - The API can be reached at [http://api.codequiz.local/api/v1](http://api.codequiz.local/api/v1)
