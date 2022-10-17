@@ -27,20 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Start the containers
-        working-directory: ./api
+      - name: Start the containers]
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d --build
 
       - name: Install composer packages
-        working-directory: ./api
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api composer install
 
       - name: Run Database migrations
-        working-directory: ./api
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api bin/console --no-interaction doctrine:migration:migrate
 
       - name: Generate openapi.yaml
-        working-directory: ./api
         run: docker-compose exec -T api bash -c "bin/console api:openapi:export --yaml" > ../docs/generated/openapi.yaml
 
       - name: Archive openapi artifacts
@@ -51,7 +47,6 @@ jobs:
             docs/generated
 
       - name: Stop containers
-        working-directory: ./api
         if: always()
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml down
 

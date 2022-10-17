@@ -20,7 +20,7 @@ phpstan.neon
 .phpunit.result.cache
 /tests/coverage
 ###< phpunit/phpunit ###
-docker-compose.override.yml
+
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
