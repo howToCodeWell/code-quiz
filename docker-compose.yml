@@ -1,0 +1,73 @@
+version: '3.5'
+
+networks:
+  code_quiz:
+    name: code_quiz
+
+volumes:
+  db-data:
+
+services:
+
+  proxy:
+    build:
+      dockerfile: Dockerfile
+      context: ./proxy/
+    networks:
+      - code_quiz
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - ./proxy/config/sites-enabled:/etc/nginx/sites-enabled
+      - ./proxy/config/sites-enabled:/etc/nginx/sites-available
+      - ./proxy/config/includes:/etc/nginx/includes
+      - ./proxy/config/nginx.conf:/etc/nginx.conf
+
+  website:
+    build:
+      dockerfile: Dockerfile
+      context: ./website/
+    networks:
+      - code_quiz
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api/
+      args:
+        BUILD_ENV: dev
+    depends_on:
+      - db
+    environment:
+      - XDEBUG_MODE=off
+    networks:
+       - code_quiz
+    volumes:
+      - ./api/:/var/www/html
+      - ./api/infra/api/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./api/infra/api/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+
+  api-nginx:
+    build:
+      dockerfile: infra/nginx/Dockerfile
+      context: ./api/
+      args:
+        BUILD_ENV: dev
+    depends_on:
+      - api
+    networks:
+      - code_quiz
+    volumes:
+      - ./api/:/var/www/html
+
+  db:
+    image: mariadb:10.9.2
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: test
+      MARIADB_DATABASE: code_quiz
+    networks:
+      - code_quiz
+    volumes:
+      - db-data:/var/lib/mysql
