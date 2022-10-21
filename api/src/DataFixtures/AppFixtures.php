@@ -7,6 +7,9 @@ use App\Entity\Question;
 use App\Entity\Quiz;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Parsedown;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Finder\Finder;
 
 class AppFixtures extends Fixture
 {
@@ -45,6 +48,83 @@ class AppFixtures extends Fixture
     }
 
     /**
+     * @return array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}}
+     */
+    public function getDataSets(): array
+    {
+        $quizData = [];
+
+        $parseDown = new Parsedown();
+        $baseDir = dirname(__DIR__) . '/../config/fixtures/quizzes';
+        $finder = new Finder();
+        $finder->files()->in($baseDir . "/*");
+        foreach ($finder as $file) {
+            $filename = $file->getFilename();
+            if ($filename === 'index') {
+                continue;
+            }
+            $contents = $file->getContents();
+            $parsed = $parseDown->parse($contents);
+
+            $crawler = new Crawler($parsed);
+
+            $parts = [
+                'question' => [],
+                'possible_answer' => [],
+                'answer' => []
+            ];
+            $data = $crawler->filter('body > *');
+
+            $possibleAnswer = false;
+            foreach ($data as $key => $node) {
+
+                $text = $node->textContent;
+                if ($text === "Possible answers") {
+                    $possibleAnswer = true;
+                }
+
+                if ($node->localName === "details") {
+                    $possibleAnswer = false;
+                    $parts['answer'][] = $node->C14N();
+                }
+
+                if ($possibleAnswer) {
+                    $parts['possible_answer'][] = $node->C14N();
+                }
+
+                if (!$possibleAnswer) {
+                    $parts['question'][] = $node->C14N();
+                }
+            }
+
+            var_dump($parts);
+            die();
+
+        }
+
+
+        /**
+         * @var array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}} $quizData
+         */
+        return $quizData;
+    }
+
+    /**
+     * @param array{title: string, slug: string} $data
+     * @return Quiz
+     */
+    public function createQuiz(array $data): Quiz
+    {
+        $entity = new Quiz();
+        $entity->setTitle($data['title'])
+            ->setSlug($data['slug']);
+
+        $this->objectManager->persist($entity);
+
+        return $entity;
+    }
+
+    /**
      * @param array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }} $questions
      * @param Quiz $quiz
      * @return array<int, Question> $createdQuestions
@@ -65,6 +145,21 @@ class AppFixtures extends Fixture
     }
 
     /**
+     * @param array{content: string} $data
+     * @param Quiz $quiz
+     * @return Question
+     */
+    public function createQuestion(array $data, Quiz $quiz): Question
+    {
+        $entity = new Question();
+        $entity->setContent($data['content'])
+            ->setQuiz($quiz);
+        $this->objectManager->persist($entity);
+
+        return $entity;
+    }
+
+    /**
      * @param array{array{content: string, is_correct: boolean, display_order: integer}} $answers
      * @param Question $question
      * @return array<int, Answer> $createdAnswers
@@ -78,65 +173,6 @@ class AppFixtures extends Fixture
         }
 
         return $createdAnswers;
-    }
-
-    /**
-     * @return array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}}
-     */
-    public function getDataSets(): array
-    {
-        $quizData = [];
-        $filePaths = $this->getFilePaths();
-        foreach ($filePaths as $filePath) {
-            $quizData[] = require dirname(__DIR__) . '/../' . $filePath;
-        }
-
-        /**
-         * @var array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}} $quizData
-         */
-        return $quizData;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getFilePaths(): array
-    {
-        return [
-            'config/fixtures/quizzes/html-quiz/quiz.php',
-            'config/fixtures/quizzes/javascript-quiz/quiz.php',
-            'config/fixtures/quizzes/python-quiz/quiz.php'
-        ];
-    }
-
-    /**
-     * @param array{title: string, slug: string} $data
-     * @return Quiz
-     */
-    public function createQuiz(array $data): Quiz
-    {
-        $entity = new Quiz();
-        $entity->setTitle($data['title'])
-            ->setSlug($data['slug']);
-
-        $this->objectManager->persist($entity);
-
-        return $entity;
-    }
-
-    /**
-     * @param array{content: string} $data
-     * @param Quiz $quiz
-     * @return Question
-     */
-    public function createQuestion(array $data, Quiz $quiz): Question
-    {
-        $entity = new Question();
-        $entity->setContent($data['content'])
-            ->setQuiz($quiz);
-        $this->objectManager->persist($entity);
-
-        return $entity;
     }
 
     /**
