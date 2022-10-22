@@ -87,7 +87,7 @@ docker-compose exec api bash -c 'bin/console doctrine:fixtures:load'
 
 ## Accessing the projects
 
-- The API can be reached at [http://api.codequiz.local/api/v1](http://api.codequiz.local/api/v1)
+- The API can be reached at [http://api.codequiz.local/v1](http://api.codequiz.local/v1)
 - The website can be reached at [http://codequiz.local/](http://codequiz.local/)
 
 ---
@@ -97,19 +97,19 @@ docker-compose exec api bash -c 'bin/console doctrine:fixtures:load'
 **Get a list of quizzes**
 ```bash
 curl -X 'GET' \
-  'http://api.codequiz.local/api/v1/quizzes' \
+  'http://api.codequiz.local/v1/quizzes' \
   -H 'accept: application/ld+json'
 ```
 **Get the first quiz**
 ```bash
 curl -X 'GET' \
-  'http://api.codequiz.local/api/v1/quiz/1' \
+  'http://api.codequiz.local/v1/quiz/1' \
   -H 'accept: application/ld+json'
 ```
 **Get the first question**
 ```bash
 curl -X 'GET' \
-  'http://api.codequiz.local/api/v1/question/1' \
+  'http://api.codequiz.local/v1/question/1' \
   -H 'accept: application/ld+json'
 ```
 

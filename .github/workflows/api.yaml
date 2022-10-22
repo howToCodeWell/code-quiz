@@ -46,7 +46,7 @@ jobs:
         run: docker-compose -f docker-compose.yml -f docker-compose.test.yml exec -T api ./vendor/bin/phpunit --testsuite unit --coverage-html tests/coverage/unit
 
       - name: Test endpoint
-        run: curl -X GET "http://localhost/api/v1"
+        run: curl -X GET "http://localhost/v1"
 
       - name: Stop containers
         if: always()
