@@ -8,7 +8,7 @@ export function mockApp() {
     const server = jsonServer.create()
     const rules = {}
     for (const key in routes) {
-        rules[`/api/${process.env.API_VERSION}${key}`] = routes[key]
+        rules[`/${process.env.API_VERSION}${key}`] = routes[key]
     }
     server.use(jsonServer.rewriter(rules))
     const router = jsonServer.router(data)
