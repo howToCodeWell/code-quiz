@@ -47,7 +47,6 @@ final class AppFixturesTest extends TestCase
 
         return $object;
     }
-
     public function testLoad()
     {
         $loadFunction = $this->appFixtures->load($this->objectManager);
@@ -68,7 +67,7 @@ final class AppFixturesTest extends TestCase
 
     public function testCreateQuestions()
     {
-        $html = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes/html-quiz/quiz.php';
+        $html = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes_old/html-quiz/quiz.php';
 
         $quiz = new Quiz;
         $quiz->setTitle('Test title');
@@ -85,7 +84,7 @@ final class AppFixturesTest extends TestCase
 
     public function testCreateAnswers()
     {
-        $question1 = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes/html-quiz/questions/question_1.php';
+        $question1 = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes_old/html-quiz/questions/question_1.php';
         $question = new Question;
         $question->setContent('Test content');
 

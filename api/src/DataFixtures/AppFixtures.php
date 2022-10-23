@@ -103,9 +103,9 @@ class AppFixtures extends Fixture
     public function getFilePaths(): array
     {
         return [
-            'config/fixtures/quizzes/html-quiz/quiz.php',
-            'config/fixtures/quizzes/javascript-quiz/quiz.php',
-            'config/fixtures/quizzes/python-quiz/quiz.php'
+            'config/fixtures/quizzes_old/html-quiz/quiz.php',
+            'config/fixtures/quizzes_old/javascript-quiz/quiz.php',
+            'config/fixtures/quizzes_old/python-quiz/quiz.php'
         ];
     }
 
