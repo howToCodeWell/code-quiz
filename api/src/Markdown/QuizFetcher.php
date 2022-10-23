@@ -3,12 +3,10 @@ namespace App\Markdown;
 
 class QuizFetcher implements FetcherInterface
 {
-    public function fetch(): array
+    public function fetch(string $source): array
     {
-        $filePath = '/config/fixtures/quizzes';
-        $baseDir = dirname(__DIR__) . '/..' . $filePath;
-
-        $directories = glob($baseDir . '/*' , GLOB_ONLYDIR);
+        $fullPath = dirname(__DIR__) . '/..' . $source;
+        $directories = glob($fullPath . '/*' , GLOB_ONLYDIR);
 
         $data = [];
         foreach($directories as $directory){

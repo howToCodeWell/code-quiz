@@ -8,7 +8,7 @@ use App\Markdown\QuizFetcher;
 use App\Markdown\QuizGenerator;
 use PHPUnit\Framework\TestCase;
 
-class MarkdownFetcherTest extends TestCase
+class QuizFetcherTest extends TestCase
 {
     public function testFetchQuizzes()
     {
@@ -23,9 +23,10 @@ class MarkdownFetcherTest extends TestCase
          * $quizzes = ['1_CSS_Quiz','2_HTML_Quiz' '3_JavaScript_Quiz']
          */
 
-        $fetcher = new QuizFetcher();
-        $data = $fetcher->fetch();
+        $source = '/config/fixtures/quizzes';
 
+        $fetcher = new QuizFetcher();
+        $data = $fetcher->fetch($source);
 
         $expected = '/config/fixtures/quizzes/1_CSS_Quiz';
 

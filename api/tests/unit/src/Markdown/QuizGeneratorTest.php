@@ -9,12 +9,11 @@ use App\Markdown\QuizFetcher;
 use App\Markdown\QuizGenerator;
 use PHPUnit\Framework\TestCase;
 
-class MarkdownGeneratorTest extends TestCase
+class QuizGeneratorTest extends TestCase
 {
 
     public function testGenerator()
     {
-
         /**
          * Return an array of directories
          *  $dataSets = [
@@ -31,14 +30,17 @@ class MarkdownGeneratorTest extends TestCase
          * ]
          */
 
+        $source = '/config/fixtures/quizzes/';
         $fetcherMock = $this->createMock(QuizFetcher::class);
-        $fetcherMock->expects(self::once())->method('fetch')->willReturn([
+        $fetcherMock->expects(self::once())
+            ->method('fetch')
+            ->with($source)
+            ->willReturn([
             '/config/fixtures/quizzes/1_CSS_Quiz',
             '/config/fixtures/quizzes/2_HTML_Quiz'
         ]);
         $quizGenerator = new QuizGenerator($fetcherMock);
-        $quizGenerator->generate();
-        $dataSets = $quizGenerator->getDataSets();
+        $dataSets = $quizGenerator->generate($source);
 
         $cssQuiz = $dataSets[0];
 

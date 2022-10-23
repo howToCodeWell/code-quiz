@@ -1,16 +1,15 @@
 <?php
 namespace App\Markdown;
 
-class QuizGenerator
+class QuizGenerator implements GeneratorInterface
 {
-    private array $filePaths;
-
     public function __construct(private FetcherInterface $fetcher)
     { }
 
-    public function generate(): void
+    public function generate(string $source): array
     {
-        $this->filePaths = $this->fetcher->fetch();
+        $filePaths = $this->fetcher->fetch($source);
+        return $this->process($filePaths);
     }
 
     /**
@@ -32,10 +31,10 @@ class QuizGenerator
         return ucfirst($name);
     }
 
-    public function getDataSets(): array
+    public function process(array $filePaths): array
     {
         $dataSets = [];
-        foreach($this->filePaths as $filePath){
+        foreach($filePaths as $filePath){
             $dataSets[] = [
                 'id' => $this->generateIDFromFilePath($filePath),
                 'name' => $this->generateNameFromFilePath($filePath),

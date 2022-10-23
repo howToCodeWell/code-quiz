@@ -2,5 +2,5 @@
 namespace App\Markdown;
 
 interface FetcherInterface {
-    public function fetch(): array;
+    public function fetch(string $source): array;
 }
