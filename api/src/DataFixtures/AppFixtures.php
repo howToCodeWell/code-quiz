@@ -47,19 +47,71 @@ class AppFixtures extends Fixture
         return $createdQuizzes;
     }
 
+    public function getQuizIDFromDirName(string $dirname): int
+    {
+        $parts = explode('_', $dirname);
+        return (int) $parts[0];
+    }
+
+    public function getQuizNameFromDirName(string $quiz): string
+    {
+        $name = str_replace('_', ' ', $quiz);
+        $name = ltrim(strstr($name, ' '), ' ');
+        return ucfirst($name);
+
+    }
+
+    public function getQuizData():array
+    {
+        $baseDir = dirname(__DIR__) . '/../config/fixtures/quizzes';
+        $finder = new Finder();
+        $dirs = $finder->directories()->in($baseDir)->depth('> 1');
+
+        $directories = glob($baseDir . '/*' , GLOB_ONLYDIR);
+
+        $quizzes = [];
+        foreach ($dirs->getIterator() as $directory) {
+            var_dump($directory);
+            die();
+            $dirName = basename($directory->getPath());
+            $quizID = $this->getQuizIDFromDirName($dirName);
+            $quizName = $this->getQuizNameFromDirName($dirName);
+
+            $quizzes[] = [
+                'dirname' => $dirName,
+                'name' => $quizName,
+                'id' => $quizID,
+            ];
+        }
+
+        return $quizzes;
+    }
+
     /**
      * @return array{array{title:string, slug: string, questions: array{array{content:string, quiz: string, answers: array{array{content: string, is_correct: boolean, display_order: integer}} }}}}
      */
     public function getDataSets(): array
     {
+
+        $n = $this->getQuizData();
+        var_dump($n);
+die();
         $quizData = [];
 
         $parseDown = new Parsedown();
         $baseDir = dirname(__DIR__) . '/../config/fixtures/quizzes';
         $finder = new Finder();
         $finder->files()->in($baseDir . "/*");
+
+
         foreach ($finder as $file) {
             $filename = $file->getFilename();
+            $dirName = basename($file->getPath());
+            $quizID = $this->getQuizIDFromDirName($dirName);
+            $quizName = $this->getQuizNameFromDirName($dirName);
+
+            var_dump($quizName); die();
+
             if ($filename === 'index') {
                 continue;
             }
@@ -68,7 +120,13 @@ class AppFixtures extends Fixture
 
             $crawler = new Crawler($parsed);
 
-            $parts = [
+            $quizzes[$dirName] = [
+                'quiz' => [
+                    'name' => $quizName,
+                    'id' => $quizID,
+                    'items' => []
+                ],
+                'filename' => $filename,
                 'question' => [],
                 'possible_answer' => [],
                 'answer' => []
@@ -76,7 +134,7 @@ class AppFixtures extends Fixture
             $data = $crawler->filter('body > *');
 
             $possibleAnswer = false;
-            foreach ($data as $key => $node) {
+            foreach ($data as $node) {
 
                 $text = $node->textContent;
                 if ($text === "Possible answers") {
@@ -92,12 +150,12 @@ class AppFixtures extends Fixture
                     $parts['possible_answer'][] = $node->C14N();
                 }
 
-                if (!$possibleAnswer) {
+                if (!$possibleAnswer && $node->localName != "details") {
                     $parts['question'][] = $node->C14N();
                 }
             }
 
-            var_dump($parts);
+            var_dump($parts['dirname']);
             die();
 
         }
