@@ -41,6 +41,7 @@ jobs:
           name: openapi_spec_artifact
           workflow: openapi.yaml
           workflow_conclusion: success
+          check_artifacts: true
           path: ./docs/generated
 
       - name: Generating Typescript API
