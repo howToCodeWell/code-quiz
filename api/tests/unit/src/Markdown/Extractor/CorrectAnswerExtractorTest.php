@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\unit\src\Markdown\Parser;
+namespace App\Tests\unit\src\Markdown\Extractor;
 
-use App\Markdown\Parser\DocumentExtractor;
+use App\Markdown\Extractor\DOMExtractor;
 use PHPUnit\Framework\TestCase;
 
 class CorrectAnswerExtractorTest extends TestCase
@@ -18,7 +18,7 @@ class CorrectAnswerExtractorTest extends TestCase
 
     public function testAnswerElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getCorrectAnswerNodes();
 
@@ -27,7 +27,7 @@ class CorrectAnswerExtractorTest extends TestCase
 
     public function testAnswerValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getCorrectAnswerNodes();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\unit\src\Markdown\Parser;
+namespace App\Tests\unit\src\Markdown\Extractor;
 
-use App\Markdown\Parser\DocumentExtractor;
+use App\Markdown\Extractor\DOMExtractor;
 use PHPUnit\Framework\TestCase;
 
 class QuestionExtractorTest extends TestCase
@@ -19,7 +19,7 @@ class QuestionExtractorTest extends TestCase
 
     public function testQuestionHeadingValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
 
@@ -28,7 +28,7 @@ class QuestionExtractorTest extends TestCase
 
     public function testQuestionHeadingElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
 
@@ -37,7 +37,7 @@ class QuestionExtractorTest extends TestCase
 
     public function testLastQuestionElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
         $count = count($questionNodes) - 1;
@@ -47,7 +47,7 @@ class QuestionExtractorTest extends TestCase
 
     public function testLastQuestionValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
         $count = count($questionNodes) - 1;

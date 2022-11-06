@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\unit\src\Markdown\Parser;
+namespace App\Tests\unit\src\Markdown\Extractor;
 
-use App\Markdown\Parser\DocumentExtractor;
+use App\Markdown\Extractor\DOMExtractor;
 use PHPUnit\Framework\TestCase;
 
 class PossibleAnswerExtractorTest extends TestCase
@@ -18,7 +18,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testHeadingValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
 
@@ -27,7 +27,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testHeadingElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
 
@@ -36,7 +36,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testFirstPossibleAnswerValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
 
@@ -45,7 +45,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testFirstPossibleAnswerElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
 
@@ -55,7 +55,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testLastPossibleAnswerValue()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
         $lastIndex = count($nodes) - 1;
@@ -65,7 +65,7 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testLastPossibleAnswerElement()
     {
-        $parser = new DocumentExtractor($this->document);
+        $parser = new DOMExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
         $lastIndex = count($nodes) - 1;

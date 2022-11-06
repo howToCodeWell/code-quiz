@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Markdown\Parser;
+namespace App\Markdown\Extractor;
 
 use DOMDocument;
 use DOMNode;
 
-class DocumentExtractor
+class DOMExtractor
 {
     /** @var DOMNode[]  **/
     private array $question = [];
