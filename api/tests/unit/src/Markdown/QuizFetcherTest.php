@@ -31,7 +31,5 @@ class QuizFetcherTest extends TestCase
         $expected = '/config/fixtures/quizzes/1_CSS_Quiz';
 
         self::assertContains($expected, $data);
-
     }
-
 }

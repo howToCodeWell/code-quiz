@@ -60,5 +60,4 @@ class QuestionGeneratorTest extends TestCase
 
         self::assertSame('Style override', $question2->getTitle());
     }
-
 }

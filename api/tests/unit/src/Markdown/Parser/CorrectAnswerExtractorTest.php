@@ -33,6 +33,4 @@ class CorrectAnswerExtractorTest extends TestCase
 
         self::assertSame('Answer: 5', trim($questionNodes[4]->nodeValue));
     }
-
-
 }

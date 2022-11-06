@@ -15,7 +15,5 @@ class QuestionFetcherTest extends TestCase
         $expected = '1_1_padding_properties.md';
 
         self::assertContains($expected, $data);
-
     }
-
 }

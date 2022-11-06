@@ -23,5 +23,4 @@ class QuestionTitleGeneratorTest extends TestCase
         $title = $generator->getTitleFromFilePath('1.md');
         self::assertFalse($title);
     }
-
 }

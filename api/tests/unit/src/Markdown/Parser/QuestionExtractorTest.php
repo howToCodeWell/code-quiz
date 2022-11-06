@@ -40,7 +40,7 @@ class QuestionExtractorTest extends TestCase
         $parser = new DocumentExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
-        $count = count($questionNodes) -1;
+        $count = count($questionNodes) - 1;
 
         self::assertSame('code', $questionNodes[$count]->nodeName);
     }
@@ -50,7 +50,7 @@ class QuestionExtractorTest extends TestCase
         $parser = new DocumentExtractor($this->document);
         $parser->extract();
         $questionNodes = $parser->getQuestionNodes();
-        $count = count($questionNodes) -1;
+        $count = count($questionNodes) - 1;
 
         self::assertSame('<?php echo "hello world";', $questionNodes[$count]->nodeValue);
     }

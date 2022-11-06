@@ -16,7 +16,6 @@ class DocumentExtractor
 
     public function __construct(private readonly string $document)
     {
-
     }
 
     /**
@@ -25,12 +24,11 @@ class DocumentExtractor
     public function extract(): void
     {
         $domDocument = new DOMDocument();
-        libxml_use_internal_errors(TRUE);
+        libxml_use_internal_errors(true);
         $domDocument->loadHTML($this->document);
         libxml_get_errors();
 
         $this->process($domDocument);
-
     }
 
     public function process(DOMNode $domNode): void
@@ -50,7 +48,6 @@ class DocumentExtractor
 
             // Get the question
             if (!$this->foundPossibleAnswers && !$this->foundCorrectAnswer) {
-
                 if ($node->nodeName !== 'body' && $node->nodeName !== 'html') {
                     $this->question[] = $node;
                 }

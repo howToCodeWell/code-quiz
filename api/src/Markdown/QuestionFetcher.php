@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Markdown;
 
 use Symfony\Component\Finder\Finder;
@@ -18,12 +19,10 @@ class QuestionFetcher implements FetcherInterface
         $filenames = [];
         $finder = new Finder();
         $files = $finder->files()->in($folderPath)->notName('index.md');
-        foreach($files as $file){
+        foreach ($files as $file) {
             $filenames[] = $file->getFilename();
         }
 
         return $filenames;
     }
-
-
 }

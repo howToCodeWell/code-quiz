@@ -4,16 +4,15 @@ namespace App\Markdown\Model;
 
 class Question implements ModelInterface
 {
-
     public function __construct(
-        private readonly int   $id,
+        private readonly int $id,
         private readonly int $quizID,
         private readonly string $filePath,
         private readonly string $title,
         private readonly array $content,
         private readonly array $possibleAnswers,
-        private readonly array $correctAnswer)
-    {
+        private readonly array $correctAnswer
+    ) {
     }
 
     /**
@@ -72,6 +71,4 @@ class Question implements ModelInterface
     {
         return $this->quizID;
     }
-
-
 }

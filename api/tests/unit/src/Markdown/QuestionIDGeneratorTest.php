@@ -39,5 +39,4 @@ class QuestionIDGeneratorTest extends TestCase
         $questionID = $generator->getIDFromFilePath('1_two.md', false);
         self::assertFalse($questionID);
     }
-
 }

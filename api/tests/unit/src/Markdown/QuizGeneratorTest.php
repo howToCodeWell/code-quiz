@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 class QuizGeneratorTest extends TestCase
 {
-
     public function testGenerateIDFromFilePath()
     {
 //        $document = '<p>This is a test</p><p>This is another test</p>';
@@ -22,5 +21,4 @@ class QuizGeneratorTest extends TestCase
 //        $id = $generator->generateIDFromFilePath($filePath);
         self::assertSame(1, 1);
     }
-
 }

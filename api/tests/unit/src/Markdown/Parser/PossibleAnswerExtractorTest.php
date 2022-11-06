@@ -58,7 +58,7 @@ class PossibleAnswerExtractorTest extends TestCase
         $parser = new DocumentExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
-        $lastIndex = count($nodes) -1;
+        $lastIndex = count($nodes) - 1;
 
         self::assertSame('[ ] 5', $nodes[$lastIndex]->nodeValue);
     }
@@ -68,7 +68,7 @@ class PossibleAnswerExtractorTest extends TestCase
         $parser = new DocumentExtractor($this->document);
         $parser->extract();
         $nodes = $parser->getPossibleAnswerNodes();
-        $lastIndex = count($nodes) -1;
+        $lastIndex = count($nodes) - 1;
 
         self::assertSame('li', $nodes[$lastIndex]->nodeName);
     }

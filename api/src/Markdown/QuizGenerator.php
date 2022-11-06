@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Markdown;
 
 use App\Markdown\Model\Quiz;
@@ -6,7 +7,8 @@ use App\Markdown\Model\Quiz;
 class QuizGenerator implements GeneratorInterface
 {
     public function __construct(private readonly FetcherInterface $fetcher)
-    { }
+    {
+    }
 
     /**
      * @param string $source
@@ -34,7 +36,7 @@ class QuizGenerator implements GeneratorInterface
         $directoryLeaf = basename($filePath);
         $name = str_replace('_', ' ', $directoryLeaf);
         $firstSpace = strstr($name, ' ');
-        if($firstSpace) {
+        if ($firstSpace) {
             $name = ltrim($firstSpace, ' ');
         }
         return ucfirst($name);

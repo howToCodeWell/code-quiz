@@ -27,8 +27,8 @@ final class AppFixturesTest extends TestCase
             ->onlyMethods(['flush', 'persist'])
             ->getMockForAbstractClass();
         $this->objectManager = $objectManager;
-        
-        $appFixtures = new AppFixtures;
+
+        $appFixtures = new AppFixtures();
         $appFixtures = $this->invokeProperty($appFixtures, 'objectManager', $objectManager);
         $this->appFixtures = $appFixtures;
     }
@@ -69,7 +69,7 @@ final class AppFixturesTest extends TestCase
     {
         $html = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes_old/html-quiz/quiz.php';
 
-        $quiz = new Quiz;
+        $quiz = new Quiz();
         $quiz->setTitle('Test title');
         $quiz->setSlug('test-slug');
 
@@ -85,7 +85,7 @@ final class AppFixturesTest extends TestCase
     public function testCreateAnswers()
     {
         $question1 = require dirname(__DIR__) . '/../../../../config/fixtures/quizzes_old/html-quiz/questions/question_1.php';
-        $question = new Question;
+        $question = new Question();
         $question->setContent('Test content');
 
         $createdAnswers = $this->appFixtures->createAnswers($question1[0]['answers'], $question);
@@ -131,7 +131,7 @@ final class AppFixturesTest extends TestCase
 
     public function testCreateQuestion()
     {
-        $quiz = new Quiz;
+        $quiz = new Quiz();
         $quiz = $this->invokeProperty($quiz, 'id', 10);
 
         $data = [
@@ -148,7 +148,7 @@ final class AppFixturesTest extends TestCase
 
     public function testCreateAnswer()
     {
-        $question = new Question;
+        $question = new Question();
         $question = $this->invokeProperty($question, 'id', 10);
 
         $data = [

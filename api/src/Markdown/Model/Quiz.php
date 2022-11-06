@@ -4,13 +4,11 @@ namespace App\Markdown\Model;
 
 class Quiz
 {
-
     public function __construct(
-        private readonly int    $id,
+        private readonly int $id,
         private readonly string $name,
         private readonly string $filePath
-    )
-    {
+    ) {
     }
 
     /**
@@ -36,6 +34,4 @@ class Quiz
     {
         return $this->filePath;
     }
-
-
 }

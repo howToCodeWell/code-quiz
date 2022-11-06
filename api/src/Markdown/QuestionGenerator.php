@@ -4,7 +4,6 @@ namespace App\Markdown;
 
 use App\Markdown\Model\Question;
 
-
 class QuestionGenerator implements GeneratorInterface
 {
     public function __construct(private readonly FetcherInterface $fetcher)
