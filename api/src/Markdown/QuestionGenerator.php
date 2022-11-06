@@ -25,6 +25,9 @@ class QuestionGenerator implements GeneratorInterface
         unset($filenameParts[0], $filenameParts[1]);
         $title = implode(' ', $filenameParts);
         $title = preg_replace('/\.md/i', '', $title);
+        if (!is_string($title)) {
+            return false;
+        }
         return ucfirst($title);
     }
 
@@ -41,12 +44,12 @@ class QuestionGenerator implements GeneratorInterface
             return false;
         }
 
-        return $filenameParts[$index];
+        return (int) $filenameParts[$index];
     }
 
     /**
      * @param string $source
-     * @return array{int, array{id: int, name: string, file_path: string}}
+     * @return array<int, Question>
      */
     public function generate(string $source): array
     {
@@ -56,7 +59,7 @@ class QuestionGenerator implements GeneratorInterface
 
     /**
      * @param string[] $filePaths
-     * @return array{int, array{id: int, name: string, file_path: string}}
+     * @return array<int, Question>
      */
     public function process(array $filePaths): array
     {
@@ -65,6 +68,11 @@ class QuestionGenerator implements GeneratorInterface
             $quizID = $this->getIDFromFilePath($filePath);
             $questionID = $this->getIDFromFilePath($filePath, false);
             $title = $this->getTitleFromFilePath($filePath);
+
+            if (!$quizID || !$questionID || !$title) {
+                continue;
+            }
+
             $content = [];
             $possibleAnswers = [];
             $correctAnswers = [];

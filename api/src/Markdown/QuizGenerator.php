@@ -12,7 +12,7 @@ class QuizGenerator implements GeneratorInterface
 
     /**
      * @param string $source
-     * @return Quiz[]
+     * @return array<int, Quiz>
      */
     public function generate(string $source): array
     {
@@ -44,7 +44,7 @@ class QuizGenerator implements GeneratorInterface
 
     /**
      * @param string[] $filePaths
-     * @return array{int, array{id: int, name: string, file_path: string}}
+     * @return array<int, Quiz>
      */
     public function process(array $filePaths): array
     {

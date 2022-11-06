@@ -2,8 +2,19 @@
 
 namespace App\Markdown\Model;
 
+use DOMNode;
+
 class Question implements ModelInterface
 {
+    /**
+     * @param int $id
+     * @param int $quizID
+     * @param string $filePath
+     * @param string $title
+     * @param DOMNode[] $content
+     * @param DOMNode[] $possibleAnswers
+     * @param DOMNode[] $correctAnswer
+     */
     public function __construct(
         private readonly int $id,
         private readonly int $quizID,
@@ -11,7 +22,7 @@ class Question implements ModelInterface
         private readonly string $title,
         private readonly array $content,
         private readonly array $possibleAnswers,
-        private readonly array $correctAnswer
+        private readonly array $correctAnswer,
     ) {
     }
 
@@ -31,25 +42,19 @@ class Question implements ModelInterface
         return $this->filePath;
     }
 
-    /**
-     * @return array
-     */
+    /** @return DOMNode[]  **/
     public function getContent(): array
     {
         return $this->content;
     }
 
-    /**
-     * @return array
-     */
+    /** @return DOMNode[]  **/
     public function getPossibleAnswers(): array
     {
         return $this->possibleAnswers;
     }
 
-    /**
-     * @return array
-     */
+    /** @return DOMNode[]  **/
     public function getCorrectAnswer(): array
     {
         return $this->correctAnswer;

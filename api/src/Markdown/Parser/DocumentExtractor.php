@@ -7,8 +7,11 @@ use DOMNode;
 
 class DocumentExtractor
 {
+    /** @var DOMNode[]  **/
     private array $question = [];
+    /** @var DOMNode[]  **/
     private array $possibleAnswers = [];
+    /** @var DOMNode[]  **/
     private array $correctAnswer = [];
 
     private bool $foundPossibleAnswers = false;
@@ -26,7 +29,6 @@ class DocumentExtractor
         $domDocument = new DOMDocument();
         libxml_use_internal_errors(true);
         $domDocument->loadHTML($this->document);
-        libxml_get_errors();
 
         $this->process($domDocument);
     }
@@ -70,16 +72,19 @@ class DocumentExtractor
         }
     }
 
+    /** @return DOMNode[]  **/
     public function getQuestionNodes(): array
     {
         return $this->question;
     }
 
+    /** @return DOMNode[]  **/
     public function getPossibleAnswerNodes(): array
     {
         return $this->possibleAnswers;
     }
 
+    /** @return DOMNode[]  **/
     public function getCorrectAnswerNodes(): array
     {
         return $this->correctAnswer;
