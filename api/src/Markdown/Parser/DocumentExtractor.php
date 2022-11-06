@@ -5,7 +5,7 @@ namespace App\Markdown\Parser;
 use DOMDocument;
 use DOMNode;
 
-class QuestionParser
+class DocumentExtractor
 {
     private array $question = [];
     private array $possibleAnswers = [];

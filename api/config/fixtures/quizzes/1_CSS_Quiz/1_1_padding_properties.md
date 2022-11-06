@@ -24,7 +24,7 @@ Another example
     <summary>
         <b>Answer</b>
     </summary>
-    <p>
-      Answer: <strong>5</strong>
-    </p>
+    <div>
+        <pre><code class="language-php">&lt;?php echo "hello world";</code></pre>
+    </div>
 </details>
