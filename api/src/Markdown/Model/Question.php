@@ -7,7 +7,9 @@ class Question implements ModelInterface
 
     public function __construct(
         private readonly int   $id,
+        private readonly int $quizID,
         private readonly string $filePath,
+        private readonly string $title,
         private readonly array $content,
         private readonly array $possibleAnswers,
         private readonly array $correctAnswer)
@@ -20,6 +22,14 @@ class Question implements ModelInterface
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return $this->filePath;
     }
 
     /**
@@ -49,9 +59,18 @@ class Question implements ModelInterface
     /**
      * @return string
      */
-    public function getFilePath(): string
+    public function getTitle(): string
     {
-        return $this->filePath;
+        return $this->title;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getQuizID(): int
+    {
+        return $this->quizID;
     }
 
 

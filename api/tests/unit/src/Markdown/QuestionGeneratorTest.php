@@ -2,57 +2,63 @@
 
 namespace App\Tests\unit\src\Markdown;
 
+use App\Markdown\FetcherInterface;
+use App\Markdown\QuestionFetcher;
 use App\Markdown\QuizFetcher;
 use App\Markdown\QuestionGenerator;
 use PHPUnit\Framework\TestCase;
 
 class QuestionGeneratorTest extends TestCase
 {
+    private QuestionFetcher $fetcherMock;
+    private const SOURCE = '/config/fixtures/quizzes/1_CSS_Quiz';
 
-    public function testGenerator()
+    public function setUp(): void
     {
-        $this->markTestSkipped('Not in current scop but needs fixing before merge');
-        /**
-         * Return an array of file data
-         *  $dataSets = [
-         *      [
-         *          'file_path' =>
-         *          'code' => '1_1',
-         *          'title' => 'Padding properties',
-         *          'quiz_id' =>  1,
-         *          'contents_raw' => '<p>Raw HTML for question 1</p>
-         *      ],
-         *      [
-         *          'code' => 1_3,
-         *          'title' => 'Style override',
-         *          'quiz_id' =>  1,
-         *          'contents_raw' => '<p>Raw HTML for question 2</p>
-         *      ],
-         * ]
-         */
-
-        $source = '/config/fixtures/quizzes/';
-        $fetcherMock = $this->createMock(QuizFetcher::class);
+        $fetcherMock = $this->createMock(QuestionFetcher::class);
         $fetcherMock->expects(self::once())
             ->method('fetch')
-            ->with($source)
+            ->with(self::SOURCE)
             ->willReturn([
-            '/config/fixtures/quizzes/1_CSS_Quiz',
-            '/config/fixtures/quizzes/2_HTML_Quiz'
-        ]);
-        $quizGenerator = new QuestionGenerator($fetcherMock);
-        $dataSets = $quizGenerator->generate($source);
+                '1_1_padding_properties.md',
+                '1_2_style_override.md',
+                '1_3_text_font.md'
+            ]);
+        $this->fetcherMock = $fetcherMock;
 
-        $cssQuiz = $dataSets[0];
+        parent::setUp();
+    }
 
-        self::assertArrayHasKey('id', $cssQuiz);
-        self::assertArrayHasKey('name', $cssQuiz);
-        self::assertArrayHasKey('file_path', $cssQuiz);
+    public function testGeneratedQuestionID()
+    {
+        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $dataSets = $quizGenerator->generate(self::SOURCE);
 
-        self::assertSame(1, $cssQuiz->getId());
-        self::assertSame('CSS Quiz', $cssQuiz->getName());
-        self::assertSame('/config/fixtures/quizzes/1_CSS_Quiz', $cssQuiz->getFilePath());
+        $question2 = $dataSets[1];
 
+        self::assertSame(2, $question2->getId());
+    }
+
+    public function testGeneratedQuizID()
+    {
+        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $dataSets = $quizGenerator->generate(self::SOURCE);
+
+        $question2 = $dataSets[1];
+
+        self::assertSame(1, $question2->getQuizId());
+        self::assertSame('Style override', $question2->getTitle());
+    }
+
+
+    public function testGeneratedTitle()
+    {
+        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $dataSets = $quizGenerator->generate(self::SOURCE);
+
+        $question2 = $dataSets[1];
+
+        self::assertSame('Style override', $question2->getTitle());
     }
 
 }
