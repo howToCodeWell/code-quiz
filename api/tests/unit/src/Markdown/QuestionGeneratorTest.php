@@ -15,6 +15,7 @@ class QuestionGeneratorTest extends TestCase
          * Return an array of file data
          *  $dataSets = [
          *      [
+         *          'file_path' =>
          *          'code' => '1_1',
          *          'title' => 'Padding properties',
          *          'quiz_id' =>  1,
@@ -46,6 +47,10 @@ class QuestionGeneratorTest extends TestCase
         self::assertArrayHasKey('id', $cssQuiz);
         self::assertArrayHasKey('name', $cssQuiz);
         self::assertArrayHasKey('file_path', $cssQuiz);
+
+        self::assertSame(1, $cssQuiz->getId());
+        self::assertSame('CSS Quiz', $cssQuiz->getName());
+        self::assertSame('/config/fixtures/quizzes/1_CSS_Quiz', $cssQuiz->getFilePath());
 
     }
 

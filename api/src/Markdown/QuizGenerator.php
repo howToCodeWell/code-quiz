@@ -1,11 +1,17 @@
 <?php
 namespace App\Markdown;
 
+use App\Markdown\Model\Quiz;
+
 class QuizGenerator implements GeneratorInterface
 {
-    public function __construct(private FetcherInterface $fetcher)
+    public function __construct(private readonly FetcherInterface $fetcher)
     { }
 
+    /**
+     * @param string $source
+     * @return Quiz[]
+     */
     public function generate(string $source): array
     {
         $filePaths = $this->fetcher->fetch($source);
@@ -27,19 +33,26 @@ class QuizGenerator implements GeneratorInterface
     {
         $directoryLeaf = basename($filePath);
         $name = str_replace('_', ' ', $directoryLeaf);
-        $name = ltrim(strstr($name, ' '), ' ');
+        $firstSpace = strstr($name, ' ');
+        if($firstSpace) {
+            $name = ltrim($firstSpace, ' ');
+        }
         return ucfirst($name);
     }
 
+    /**
+     * @param string[] $filePaths
+     * @return array{int, array{id: int, name: string, file_path: string}}
+     */
     public function process(array $filePaths): array
     {
         $dataSets = [];
-        foreach($filePaths as $filePath){
-            $dataSets[] = [
-                'id' => $this->generateIDFromFilePath($filePath),
-                'name' => $this->generateNameFromFilePath($filePath),
-                'file_path' => $filePath
-            ];
+        foreach ($filePaths as $filePath) {
+            $id = $this->generateIDFromFilePath($filePath);
+            $name = $this->generateNameFromFilePath($filePath);
+
+            $quizModel = new Quiz($id, $name, $filePath);
+            $dataSets[] = $quizModel;
         }
         return $dataSets;
     }

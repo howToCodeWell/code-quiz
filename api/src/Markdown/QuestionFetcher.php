@@ -9,7 +9,7 @@ class QuestionFetcher implements FetcherInterface
      * Fetch all the question filenames from within a given quiz directory (source)
      *
      * @param string $source
-     * @return array
+     * @return string[]
      */
     public function fetch(string $source): array
     {
