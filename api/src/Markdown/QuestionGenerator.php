@@ -73,10 +73,7 @@ class QuestionGenerator implements GeneratorInterface
                 continue;
             }
 
-            $content = [];
-            $possibleAnswers = [];
-            $correctAnswers = [];
-            $question = new Question($questionID, $quizID, $filePath, $title, $content, $possibleAnswers, $correctAnswers);
+            $question = new Question($questionID, $quizID, $filePath, $title);
 
             $dataSets[] = $question;
         }
