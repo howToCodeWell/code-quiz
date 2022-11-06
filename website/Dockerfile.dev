@@ -1,0 +1,24 @@
+ARG NODE_ENV=dev
+NODE_ENV=${NODE_ENV}
+
+FROM node:16-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+COPY package.json yarn.lock* ./
+
+COPY ./infra/docker/scripts ./scripts
+RUN chmod +x -Rv ./scripts/
+RUN ./scripts/yarn_install.sh
+# The below install script will be replaced by yarn_install.sh
+RUN yarn install
+
+COPY . .
+
+EXPOSE 3000
+ENV PORT 3000
+
+# The below will be replaced by the entry point
+CMD ["yarn", "dev"]
+
+ENTRYPOINT ./scripts/entry_point.sh
