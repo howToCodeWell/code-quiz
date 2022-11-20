@@ -7,30 +7,32 @@ use DOMNode;
 
 class DOMExtractor
 {
-    /** @var DOMNode[]  **/
+    /** @var DOMNode[]  * */
     private array $question = [];
-    /** @var DOMNode[]  **/
+    /** @var DOMNode[]  * */
     private array $possibleAnswers = [];
-    /** @var DOMNode[]  **/
+    /** @var DOMNode[]  * */
     private array $correctAnswer = [];
 
     private bool $foundPossibleAnswers = false;
     private bool $foundCorrectAnswer = false;
 
-    public function __construct(private readonly string $document)
-    {
-    }
-
     /**
-     * @return void
+     * @return array{question: DOMNode[], possible_answers: DOMNode[], correct_answer:DOMNode[] }
      */
-    public function extract(): void
+    public function extract(string $document): array
     {
         $domDocument = new DOMDocument();
         libxml_use_internal_errors(true);
-        $domDocument->loadHTML($this->document);
+        $domDocument->loadHTML($document);
 
         $this->process($domDocument);
+
+        return [
+            'question' => $this->question,
+            'possible_answers' => $this->possibleAnswers,
+            'correct_answer' => $this->correctAnswer
+        ];
     }
 
     public function process(DOMNode $domNode): void
@@ -72,19 +74,19 @@ class DOMExtractor
         }
     }
 
-    /** @return DOMNode[]  **/
+    /** @return DOMNode[]  * */
     public function getQuestionNodes(): array
     {
         return $this->question;
     }
 
-    /** @return DOMNode[]  **/
+    /** @return DOMNode[]  * */
     public function getPossibleAnswerNodes(): array
     {
         return $this->possibleAnswers;
     }
 
-    /** @return DOMNode[]  **/
+    /** @return DOMNode[]  * */
     public function getCorrectAnswerNodes(): array
     {
         return $this->correctAnswer;

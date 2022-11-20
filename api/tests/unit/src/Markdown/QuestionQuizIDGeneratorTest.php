@@ -3,6 +3,7 @@
 namespace App\Tests\unit\src\Markdown;
 
 use App\Markdown\FetcherInterface;
+use App\Markdown\Parser\MarkdownParser;
 use App\Markdown\QuestionGenerator;
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +12,8 @@ class QuestionQuizIDGeneratorTest extends TestCase
     public function testGetQuestionID()
     {
         $fetcherMock = $this->createMock(FetcherInterface::class);
-        $generator = new QuestionGenerator($fetcherMock);
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $generator = new QuestionGenerator($fetcherMock, $parserMock);
         $ID = $generator->getIDFromFilePath('1_2_style_override.md');
         self::assertSame(1, $ID);
     }
@@ -19,7 +21,8 @@ class QuestionQuizIDGeneratorTest extends TestCase
     public function testGetQuestionIDWithDoubleDigits()
     {
         $fetcherMock = $this->createMock(FetcherInterface::class);
-        $generator = new QuestionGenerator($fetcherMock);
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $generator = new QuestionGenerator($fetcherMock, $parserMock);
         $ID = $generator->getIDFromFilePath('10_20_style_override.md');
         self::assertSame(10, $ID);
     }
@@ -27,7 +30,8 @@ class QuestionQuizIDGeneratorTest extends TestCase
     public function testGetQuestionIDWithNoIDValue()
     {
         $fetcherMock = $this->createMock(FetcherInterface::class);
-        $generator = new QuestionGenerator($fetcherMock);
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $generator = new QuestionGenerator($fetcherMock, $parserMock);
         $ID = $generator->getIDFromFilePath('foo.md');
         self::assertFalse($ID);
     }
@@ -35,7 +39,8 @@ class QuestionQuizIDGeneratorTest extends TestCase
     public function testGetQuestionIDWithIncorrectValueType()
     {
         $fetcherMock = $this->createMock(FetcherInterface::class);
-        $generator = new QuestionGenerator($fetcherMock);
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $generator = new QuestionGenerator($fetcherMock, $parserMock);
         $ID = $generator->getIDFromFilePath('one_2.md');
         self::assertFalse($ID);
     }

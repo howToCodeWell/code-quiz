@@ -19,8 +19,8 @@ class QuestionExtractorTest extends TestCase
 
     public function testQuestionHeadingValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getQuestionNodes();
 
         self::assertSame('This is the question', $questionNodes[0]->nodeValue);
@@ -28,8 +28,8 @@ class QuestionExtractorTest extends TestCase
 
     public function testQuestionHeadingElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getQuestionNodes();
 
         self::assertSame('h1', $questionNodes[0]->nodeName);
@@ -37,8 +37,8 @@ class QuestionExtractorTest extends TestCase
 
     public function testLastQuestionElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getQuestionNodes();
         $count = count($questionNodes) - 1;
 
@@ -47,8 +47,8 @@ class QuestionExtractorTest extends TestCase
 
     public function testLastQuestionValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getQuestionNodes();
         $count = count($questionNodes) - 1;
 

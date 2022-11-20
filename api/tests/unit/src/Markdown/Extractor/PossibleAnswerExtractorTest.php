@@ -18,8 +18,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testHeadingValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
 
         self::assertSame('Possible answers', $nodes[0]->nodeValue);
@@ -27,8 +27,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testHeadingElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
 
         self::assertSame('h2', $nodes[0]->nodeName);
@@ -36,8 +36,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testFirstPossibleAnswerValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
 
         self::assertSame('[ ] 3', $nodes[2]->nodeValue);
@@ -45,8 +45,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testFirstPossibleAnswerElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
 
         self::assertSame('li', $nodes[2]->nodeName);
@@ -55,8 +55,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testLastPossibleAnswerValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
         $lastIndex = count($nodes) - 1;
 
@@ -65,8 +65,8 @@ class PossibleAnswerExtractorTest extends TestCase
 
     public function testLastPossibleAnswerElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $nodes = $parser->getPossibleAnswerNodes();
         $lastIndex = count($nodes) - 1;
 

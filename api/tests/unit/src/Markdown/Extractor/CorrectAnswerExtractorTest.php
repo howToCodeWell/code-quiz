@@ -18,8 +18,8 @@ class CorrectAnswerExtractorTest extends TestCase
 
     public function testAnswerElement()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getCorrectAnswerNodes();
 
         self::assertSame('p', $questionNodes[4]->nodeName);
@@ -27,8 +27,8 @@ class CorrectAnswerExtractorTest extends TestCase
 
     public function testAnswerValue()
     {
-        $parser = new DOMExtractor($this->document);
-        $parser->extract();
+        $parser = new DOMExtractor();
+        $parser->extract($this->document);
         $questionNodes = $parser->getCorrectAnswerNodes();
 
         self::assertSame('Answer: 5', trim($questionNodes[4]->nodeValue));

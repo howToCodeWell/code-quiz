@@ -3,10 +3,11 @@
 namespace App\Markdown;
 
 use App\Markdown\Model\Question;
+use App\Markdown\Parser\MarkdownParser;
 
 class QuestionGenerator implements GeneratorInterface
 {
-    public function __construct(private readonly FetcherInterface $fetcher)
+    public function __construct(private readonly FetcherInterface $fetcher, private readonly MarkdownParser $markdownParser)
     {
     }
 
@@ -74,6 +75,7 @@ class QuestionGenerator implements GeneratorInterface
             }
 
             $question = new Question($questionID, $quizID, $filePath, $title);
+            $question = $this->markdownParser->parser($question);
 
             $dataSets[] = $question;
         }

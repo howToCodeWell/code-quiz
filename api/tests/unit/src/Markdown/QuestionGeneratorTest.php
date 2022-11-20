@@ -3,6 +3,8 @@
 namespace App\Tests\unit\src\Markdown;
 
 use App\Markdown\FetcherInterface;
+use App\Markdown\Model\Question;
+use App\Markdown\Parser\MarkdownParser;
 use App\Markdown\QuestionFetcher;
 use App\Markdown\QuizFetcher;
 use App\Markdown\QuestionGenerator;
@@ -31,7 +33,13 @@ class QuestionGeneratorTest extends TestCase
 
     public function testGeneratedQuestionID()
     {
-        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $question = $this->createMock(Question::class);
+        $question->expects(self::once())->method('getId')->willReturn(2);
+
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $parserMock->expects(self::any())->method('parser')->willReturn($question);
+
+        $quizGenerator = new QuestionGenerator($this->fetcherMock, $parserMock);
         $dataSets = $quizGenerator->generate(self::SOURCE);
 
         $question2 = $dataSets[1];
@@ -41,19 +49,30 @@ class QuestionGeneratorTest extends TestCase
 
     public function testGeneratedQuizID()
     {
-        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $question = $this->createMock(Question::class);
+        $question->expects(self::once())->method('getQuizId')->willReturn(1);
+
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $parserMock->expects(self::any())->method('parser')->willReturn($question);
+
+        $quizGenerator = new QuestionGenerator($this->fetcherMock, $parserMock);
         $dataSets = $quizGenerator->generate(self::SOURCE);
 
         $question2 = $dataSets[1];
 
         self::assertSame(1, $question2->getQuizId());
-        self::assertSame('Style override', $question2->getTitle());
     }
 
 
     public function testGeneratedTitle()
     {
-        $quizGenerator = new QuestionGenerator($this->fetcherMock);
+        $question = $this->createMock(Question::class);
+        $question->expects(self::once())->method('getTitle')->willReturn('Style override');
+
+        $parserMock = $this->createMock(MarkdownParser::class);
+        $parserMock->expects(self::any())->method('parser')->willReturn($question);
+
+        $quizGenerator = new QuestionGenerator($this->fetcherMock, $parserMock);
         $dataSets = $quizGenerator->generate(self::SOURCE);
 
         $question2 = $dataSets[1];
