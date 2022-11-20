@@ -9,7 +9,7 @@ afterAll(() => {
     app.close()
 });
 
-describe('API Request /quiz', () => {
+describe('API Request /api/v1/quiz', () => {
     it('Should have a status code of 200', async () => {
         const response = await getAll()
         expect(response.status).toEqual(200)

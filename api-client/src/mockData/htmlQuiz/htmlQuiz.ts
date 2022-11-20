@@ -4,14 +4,14 @@ import {
 
 const HTMLQuiz: QuizJsonldRead =
     {
-        '@context': "/api/v1/contexts/Quiz",
-        '@id': "/api/v1/quizzes",
+        '@context': "/v1/contexts/Quiz",
+        '@id': "/v1/quizzes",
         '@type': "Quiz",
         title: "HTML Quiz",
         slug: 'html-quiz',
         questions: [
-            "/api/v1/question/1",
-            "/api/v1/question/2"
+            "/v1/question/1",
+            "/v1/question/2"
         ]
     }
 
