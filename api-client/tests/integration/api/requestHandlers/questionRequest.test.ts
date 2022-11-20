@@ -9,18 +9,18 @@ afterAll(() => {
     app.close()
 });
 
-describe("API Request '/v1/question/1'", () => {
+describe("API Request '/api/v1/question/1'", () => {
     it('Should have a status code of 200', async () => {
         const response = await getById("1")
         expect(response.status).toEqual(200)
     })
 
-    it("Should have @id '/v1/question/1'", async () => {
+    it("Should have @id '/api/v1/question/1'", async () => {
         const response = await getById("1")
         expect(response.data['@id']).toEqual('/v1/question/1')
     })
 
-    it("Should have @context '/v1/contexts/Question'", async () => {
+    it("Should have @context '/api/v1/contexts/Question'", async () => {
         const response = await getById("1")
         expect(response.data['@context']).toEqual('/v1/contexts/Question')
     })
