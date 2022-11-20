@@ -110,7 +110,7 @@ curl -X 'GET' \
 ```bash
 curl -X 'GET' \
   'http://api.codequiz.local/v1/question/1' \
-  -H 'accept: application/ld+json'
+  -H 'accept: application/ld+json' 
 ```
 
 ---
